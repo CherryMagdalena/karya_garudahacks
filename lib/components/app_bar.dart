@@ -18,20 +18,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: IconButton(
             icon: Icon(Icons.shopping_basket),
             color: color1,
-            onPressed: (){
+            onPressed: () {
               //To shopping cart page
             },
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(right:25.0),
-          child: IconButton(
-            icon:Icon(Icons.chat),
-            onPressed: (){
-              //To chatting page
-            },
-          )
-        )
+            padding: EdgeInsets.only(right: 25.0),
+            child: IconButton(
+              icon: Icon(Icons.chat),
+              onPressed: () {
+                //To chatting page
+              },
+            ))
       ],
     );
   }
