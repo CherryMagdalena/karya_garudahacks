@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
+import 'package:karya_garudahacks/screens/home_screen.dart';
+import 'package:karya_garudahacks/screens/setting_screen.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
   @override
@@ -12,6 +14,8 @@ class CustomBottomAppBar extends StatelessWidget {
             PageIcon(
                 iconData: Icons.home,
                 onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
                   //To Home Page
                 }),
             PageIcon(
@@ -27,6 +31,8 @@ class CustomBottomAppBar extends StatelessWidget {
             PageIcon(
                 iconData: Icons.person,
                 onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SettingScreen()));
                   //To Profile
                 }),
           ],

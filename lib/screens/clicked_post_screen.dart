@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/screens/purchase_confirm_page.dart';
+import 'package:karya_garudahacks/components/app_bar.dart';
+import 'package:karya_garudahacks/components/bottom_app_bar.dart';
 
 Column _buildButtonColumn(IconData icon) {
   return Column(
@@ -155,6 +157,8 @@ class ClickedPost extends StatelessWidget {
     );
 
     return Scaffold(
+      appBar: CustomAppBar(),
+      bottomNavigationBar: CustomBottomAppBar(),
       body: Column(
         children: [
           profile,
