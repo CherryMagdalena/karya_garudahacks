@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
+import 'package:karya_garudahacks/screens/category_selection_screen.dart';
 import 'package:karya_garudahacks/services/database.dart';
 import 'package:karya_garudahacks/model/user.dart';
 import 'package:provider/provider.dart';
@@ -74,6 +75,8 @@ class _SignUpDataState extends State<SignUpData> {
                     ),
                     onPressed: () async {
                       //navigate to next page
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> CategorySelectionPage()));
+                      //update data to database
                       await DatabaseService(uid: user.uid).updateUserData(
                           name ?? userData.name,
                           username ?? userData.username);
