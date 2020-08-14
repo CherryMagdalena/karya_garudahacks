@@ -1,7 +1,7 @@
 // Clicked Post Screen : when post from home screen is clicked
 
 import 'package:flutter/material.dart';
-import 'package:karya_garudahacks/purchase_confirm_page.dart';
+import 'package:karya_garudahacks/screens/purchase_confirm_page.dart';
 
 Column _buildButtonColumn(IconData icon) {
   return Column(

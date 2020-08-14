@@ -1,6 +1,6 @@
 // Home Screen
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/Samantha/AndroidStudioProjects/karya_garudahacks/lib/screens/clicked_post_screen.dart';
+import 'package:karya_garudahacks/screens/clicked_post_screen.dart';
 
 Column _buildButtonColumn(IconData icon) {
   return Column(

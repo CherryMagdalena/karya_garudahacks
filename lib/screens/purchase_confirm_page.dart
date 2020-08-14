@@ -1,7 +1,7 @@
 // Purchase confirm when clicked purchase (one kind of product)
 
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/Samantha/AndroidStudioProjects/karya_garudahacks/lib/screens/checkout_screen_oneproduct.dart';
+import 'package:karya_garudahacks/screens/checkout_screen_oneproduct.dart';
 
 class PurchaseConfirmation extends StatefulWidget {
   @override
