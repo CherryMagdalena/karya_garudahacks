@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
+import 'package:karya_garudahacks/screens/sign_up_screen.dart';
 import 'package:karya_garudahacks/services/auth.dart';
 
 const textInputDecoration = InputDecoration(
@@ -83,7 +84,11 @@ class _LogInState extends State<LogIn> {
                       setState(() {
                         error = 'Credentials do not match';
                       });
-                    } else {} //navigate to homescreen
+                    } else {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SignUp()));
+                    } //navigate to homescreen
                   };
                 },//authentication
               ),
