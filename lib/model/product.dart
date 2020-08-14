@@ -10,3 +10,12 @@ class Product {
       this.description,
       this.price});
 }
+
+List categoryList = [
+  'Traditional Drawing',
+  'DIY',
+  'Woodworking',
+  'Digital Drawing',
+  '3D Rendering',
+  'Sculpture',
+];
