@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
+import 'package:karya_garudahacks/services/database.dart';
+import 'package:karya_garudahacks/model/user.dart';
+import 'package:provider/provider.dart';
 
 const textInputDecoration = InputDecoration(
   fillColor: Colors.white,
@@ -26,6 +29,8 @@ class _SignUpDataState extends State<SignUpData> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
+
     return Scaffold(
       backgroundColor: color3,
       appBar: AppBar(
@@ -54,18 +59,26 @@ class _SignUpDataState extends State<SignUpData> {
               ),
               SizedBox(height: 20.0),
               //create account button
-              RaisedButton(
-                color: color1,
-                child: Text(
-                  'Create Account',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30.0,
-                  ),
-                ),
-                onPressed: (){
-                  //navigate to next page
-                  //send data to database
+              StreamBuilder<UserData>(
+                stream: DatabaseService(uid: user.uid).userData,
+                builder: (context, snapshot) {
+                  UserData userData = snapshot.data;
+                  return  RaisedButton(
+                    color: color1,
+                    child: Text(
+                      'Create Account',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30.0,
+                      ),
+                    ),
+                    onPressed: () async {
+                      //navigate to next page
+                      await DatabaseService(uid: user.uid).updateUserData(
+                          name ?? userData.name,
+                          username ?? userData.username);
+                    },
+                  );
                 },
               )
             ],
