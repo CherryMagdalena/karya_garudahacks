@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
+import 'package:karya_garudahacks/services/auth.dart';
 
 const textInputDecoration = InputDecoration(
   fillColor: Colors.white,
@@ -21,8 +22,11 @@ class LogIn extends StatefulWidget {
 class _LogInState extends State<LogIn> {
 
   final _formKey = GlobalKey<FormState>();
+  final AuthService _auth = AuthService();
+
   String email = '';
   String password = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +75,17 @@ class _LogInState extends State<LogIn> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                onPressed: (){}, //authentication
+                onPressed: () async {
+                  if (_formKey.currentState.validate()){
+                    dynamic result =
+                        await _auth.signInWithEmailAndPass(email, password);
+                    if (result==null){
+                      setState(() {
+                        error = 'Credentials do not match';
+                      });
+                    }
+                  };
+                },//authentication
               ),
               Text(
                 '-or-',
@@ -92,6 +106,10 @@ class _LogInState extends State<LogIn> {
                 ),
                 onPressed: (){}, //navigate to sign up page
               ),
+              SizedBox(height: 10.0),
+              Text(
+                error
+              )
             ],
           ),
 
