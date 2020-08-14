@@ -70,6 +70,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
+                onPressed: (){
+                  setState((){
+                    followPressed = !followPressed;
+                  }
+                  );
+                },
               ),
             ],
           ),
