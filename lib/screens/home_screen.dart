@@ -1,6 +1,9 @@
 // Home Screen
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/screens/clicked_post_screen.dart';
+import 'package:karya_garudahacks/components/app_bar.dart';
+import 'package:karya_garudahacks/components/bottom_app_bar.dart';
+import 'package:karya_garudahacks/model/colors.dart';
 
 Column _buildButtonColumn(IconData icon) {
   return Column(
@@ -17,17 +20,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       home: Scaffold(
-
+        backgroundColor: color4,
+        appBar: CustomAppBar(),
+        bottomNavigationBar: CustomBottomAppBar(),
         body: Container(
-
           child: Column(
-
             children: [
-
               Expanded(
-
                 child: ListView.builder(
                     shrinkWrap: true,
                     itemCount: 4,
