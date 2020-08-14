@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "508904277220",
+    "firebase_url": "https://karya-43846.firebaseio.com",
+    "project_id": "karya-43846",
+    "storage_bucket": "karya-43846.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:508904277220:android:c48b062be159f02b5998f1",
+        "android_client_info": {
+          "package_name": "com.example.karya_garudahacks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "508904277220-82bq2dsfqi6bsiqp220o5hpn7t4qv5q0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.karya_garudahacks",
+            "certificate_hash": "356d65a437668cc15a79609eebbce74e9f480d3d"
+          }
+        },
+        {
+          "client_id": "508904277220-3cus5ebeomscmlb7e8dtrov0b2dvohc1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4Llw_Fl5d26oufdQDIo_pH9Bb8rx4d-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "508904277220-3cus5ebeomscmlb7e8dtrov0b2dvohc1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
