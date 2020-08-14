@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/screens/home_screen.dart';
+import 'package:karya_garudahacks/screens/purchase_home_screen.dart';
 import 'package:karya_garudahacks/screens/setting_screen.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
@@ -26,7 +27,10 @@ class CustomBottomAppBar extends StatelessWidget {
             PageIcon(
                 iconData: Icons.shopping_cart,
                 onPressed: () {
-                  //To Shopping Page
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PurchaseHomeScreen()));
                 }),
             PageIcon(
                 iconData: Icons.person,
