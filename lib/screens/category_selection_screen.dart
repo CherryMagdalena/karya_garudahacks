@@ -3,6 +3,7 @@ import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:karya_garudahacks/model/user.dart';
+import 'package:karya_garudahacks/model/product.dart';
 
 //preparing  lists to contain information
 List chosenCategory = [];
@@ -67,7 +68,7 @@ class _CategorySelectionPageState extends State<CategorySelectionPage> {
                     color: isPressed[index] ? color1: color3,
                     child: Center(
                       child: Text(
-                        'Categories here $index',
+                        categoryList[index],
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -79,9 +80,11 @@ class _CategorySelectionPageState extends State<CategorySelectionPage> {
                       //ayo isPressed check
                       if (isPressed[index] == false){
                         //add category
+                        chosenCategory.add(categoryList[index]);
                       }
                       if (isPressed[index] == true){
                         //remove category
+                        chosenCategory.remove(categoryList[index]);
                       }
                       setState((){
                         isPressed[index] = !isPressed[index];
@@ -109,7 +112,7 @@ class _CategorySelectionPageState extends State<CategorySelectionPage> {
                     chosenCategory[1] ?? categoryData.category2,
                     chosenCategory[2] ?? categoryData.category3,
                   );
-                  //clearing:
+                  //clearing
                   chosenCategory.clear();
                   isPressed.fillRange(0, 7, false);
                 },
