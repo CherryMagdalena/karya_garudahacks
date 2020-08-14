@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
+import 'package:karya_garudahacks/components/app_bar.dart';
+import 'package:karya_garudahacks/components/bottom_app_bar.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -13,8 +15,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     bool followPressed = false;
     return Scaffold(
       backgroundColor: color4,
-      //appBar: CustomAppbar(),
-      //bottomNavigationBar: CustomBottomAppBar(),
+      appBar: CustomAppBar(),
+      bottomNavigationBar: CustomBottomAppBar(),
 
       ///add streambuilder here (before return column)
       body: Column(
@@ -27,7 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 height: 64,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  ///find icon!
+                  ///find icon! upload default profpic to firebase
                   /*image: DecorationImage(
                     image:
                   ),*/
