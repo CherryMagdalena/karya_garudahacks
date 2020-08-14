@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
+import 'package:karya_garudahacks/screens/sign_up_screen.dart';
 import 'package:karya_garudahacks/services/auth.dart';
 
 const textInputDecoration = InputDecoration(
@@ -105,7 +106,12 @@ class _LogInState extends State<LogIn> {
                       color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
-                onPressed: () {}, //navigate to sign up page
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context)=> SignUp())
+                  );
+                }, //navigate to sign up page
               ),
               SizedBox(height: 10.0),
               Text(error)
