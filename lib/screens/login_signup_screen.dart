@@ -83,7 +83,7 @@ class _LogInState extends State<LogIn> {
                       setState(() {
                         error = 'Credentials do not match';
                       });
-                    }
+                    } else {} //navigate to homescreen
                   };
                 },//authentication
               ),
