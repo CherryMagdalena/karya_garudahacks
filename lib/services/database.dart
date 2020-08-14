@@ -56,5 +56,4 @@ class DatabaseService {
   Stream<CategoryData> get categoryData {
     return userCollection.document(uid).snapshots().map(_categoryDataFromSS);
   }
-
 }
