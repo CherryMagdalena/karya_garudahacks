@@ -10,6 +10,7 @@ import 'package:karya_garudahacks/model/shopping_cart.dart';
 import 'package:karya_garudahacks/screens/shopping_basket.dart';
 import 'package:karya_garudahacks/model/product.dart';
 import 'package:karya_garudahacks/components/price_formatter.dart';
+import 'package:karya_garudahacks/screens/profile_screen.dart';
 
 Column _buildButtonColumn(IconData icon) {
   return Column(
@@ -21,13 +22,14 @@ Column _buildButtonColumn(IconData icon) {
   );
 }
 
+
 class ClickedPost extends StatelessWidget {
   final Product products;
   ClickedPost(this.products);
 
   @override
   Widget build(BuildContext context) {
-    Widget profile = Container(
+    Widget profile = MaterialButton(
       padding: EdgeInsets.all(15),
       child: Row(
         children: [
@@ -53,6 +55,13 @@ class ClickedPost extends StatelessWidget {
           ),
         ],
       ),
+      onPressed: () {
+        Navigator.push(context,
+          MaterialPageRoute(
+              builder: (context) => TheirProfileScreen(products.username),
+          ),
+        );
+      },
     );
 
     Widget titleSection = Container(
@@ -213,6 +222,7 @@ class ClickedPost extends StatelessWidget {
           ],
         ),
       ),
+
     );
   }
 }

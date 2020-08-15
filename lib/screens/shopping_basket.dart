@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/shopping_cart.dart';
 import 'package:karya_garudahacks/model/colors.dart';
-import 'package:karya_garudahacks/model/product.dart';
 import 'package:karya_garudahacks/screens/checkout_multiple.dart';
 import 'package:karya_garudahacks/components/price_formatter.dart';
 
@@ -79,7 +78,7 @@ class _ShoppingBasketState extends State<ShoppingBasket> {
                     onPressed: () {
                       setState(() {
                         if (ShoppingCart.qty[index] == 1) {
-                          //ShoppingCart.qty[index];
+
                         } else {
                           ShoppingCart.qty[index] -= 1;
                         }
@@ -93,6 +92,7 @@ class _ShoppingBasketState extends State<ShoppingBasket> {
                         ShoppingCart.tocart.remove(ShoppingCart.tocart[index]);
                         ShoppingCart.qty.removeAt(index);
                         print(ShoppingCart.qty.length);
+                        clearQTY();
                       });
                     },
                   ),
@@ -126,14 +126,19 @@ class _ShoppingBasketState extends State<ShoppingBasket> {
               ),
             ),
             MaterialButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CheckoutCart()),
-                );
+              onPressed: (){
+                if(ShoppingCart.tocart.isEmpty){}
+                else
+                {
+                  Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => CheckoutCart()
+                    ),
+                  );
+                }
+
               },
-              child: Text(
-                'Checkout',
+              child: Text('Checkout',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),

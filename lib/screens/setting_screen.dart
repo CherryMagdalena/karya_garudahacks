@@ -9,7 +9,6 @@ import 'package:karya_garudahacks/services/auth.dart';
 import 'package:karya_garudahacks/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:karya_garudahacks/model/user.dart';
-
 import 'login_signup_screen.dart';
 
 class SettingScreen extends StatelessWidget {

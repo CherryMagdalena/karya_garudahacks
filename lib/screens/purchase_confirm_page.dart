@@ -27,7 +27,7 @@ class _PurchaseConfirmationState extends State<PurchaseConfirmation> {
   void _minusCounter() {
     setState(() {
       if (_counter == 1) {
-        _counter;
+
       }
       else {
         _counter--;
@@ -61,20 +61,21 @@ class _PurchaseConfirmationState extends State<PurchaseConfirmation> {
             products.title, style: TextStyle(color: color1),
           ),
           subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Row(
-                children:<Widget>[
-                  Expanded(child: Text('Price(1): ', style: TextStyle(color: color2),)),
 
-                  Expanded(child: Text(
+
+                   Text('Price(1): ', style: TextStyle(color: color2),),
+
+                   Text(
                     priceFormatter(
                         products.price
                     ),
                       style: TextStyle(color: color2),
-                  )),
+                  )
                 ],
-              ),
-            ],
+
+
           ),
 
           trailing: Wrap(

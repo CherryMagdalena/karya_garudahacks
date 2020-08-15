@@ -27,7 +27,7 @@ class PostData {
   final String category;
   final String title;
   final String description;
-  final int price;
+  final String price;
 
   PostData({
     this.uid,
