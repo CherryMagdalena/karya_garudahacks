@@ -79,7 +79,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   decoration: roundButton(),
                 ),
                 Container(
-                  width: 118,
+                  width: 102,
                   child: Text(
                     'Sale only',
                     textAlign: TextAlign.left,
@@ -87,7 +87,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ],
             ),
-            Container(height:9,), //spacing
+            Container(height:12,), //spacing
             SearchScreenPosts(),
           ],
         ),
