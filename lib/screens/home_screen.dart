@@ -44,15 +44,16 @@ class HomeScreen extends StatelessWidget {
                               alignment: const Alignment(1.0, 0.9),
                               children: [
                                 MaterialButton(
-                                  child:  Text('IMAGE INSERT'),
-
-                                  //ADD LGSG DB
-
+                                  child:  Image.network(
+                                    products.image,///imagePath
+                                    width: 400,
+                                    height: 200,
+                                    fit: BoxFit.cover,
+                                  ),
                                   onPressed: () {
                                    Navigator.push(context,
                                     MaterialPageRoute(
                                       builder: (context) => ClickedPost(products)
-
                                     ),
                                     );
                                   },
@@ -62,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                                     color: Colors.black45,
                                   ),
                                   child: Text( 'Rp.' +
-                                    'PRICE OF PRODUCT',
+                                    products.price.toString(),
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -78,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                               const EdgeInsets.only(left: 20.0, top: 20.0),
                               alignment: Alignment.centerLeft,
                               child: Text(
-                               'PRODUCT DESCRIPTION',
+                               products.description,
                               ),
                             ),
                             //tagS
