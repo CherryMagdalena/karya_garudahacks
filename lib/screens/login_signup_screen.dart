@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/screens/sign_up_screen.dart';
 import 'package:karya_garudahacks/services/auth.dart';
+import 'package:karya_garudahacks/components/loading.dart';
 
 const textInputDecoration = InputDecoration(
   fillColor: Colors.white,
@@ -26,9 +27,11 @@ class _LogInState extends State<LogIn> {
   String password = '';
   String error = '';
 
+  bool loading = false;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       backgroundColor: color3,
       body: Container(
         alignment: Alignment(0.0, 0.0),
@@ -77,10 +80,14 @@ class _LogInState extends State<LogIn> {
                 ),
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
+                    setState(() {
+                      loading = true;
+                    });
                     dynamic result =
                         await _auth.signInWithEmailAndPass(email, password);
                     if (result == null) {
                       setState(() {
+                        loading = false;
                         error = 'Credentials do not match';
                       });
                     } else {} //navigate to homescreen
