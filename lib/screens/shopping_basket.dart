@@ -39,64 +39,79 @@ class _ShoppingBasketState extends State<ShoppingBasket> {
       body: ListView.builder(
         itemCount: ShoppingCart.tocart.length,
         itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              leading: Image.network(
-                ShoppingCart.tocart[index].image,
-                width: 100.0,
-                height: 100.0,
-              ),
-              title: Text(ShoppingCart.tocart[index].title),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text('Price(1) :'),
-                  Text(
-                    priceFormatter(ShoppingCart.tocart[index].price),
-                  )
-                ],
-              ),
-              trailing: new Wrap(
-                direction: Axis.vertical,
-                children: <Widget>[
-                  new IconButton(
-                    icon: Icon(Icons.arrow_drop_up),
-                    onPressed: () {
-                      setState(() {
-                        ShoppingCart.qty[index] += 1;
-                      });
-                    },
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(top: 15.0),
-                    child: Text(
-                      ShoppingCart.qty[index].toString(),
+          return SizedBox(
+            height: 100.0,
+            child: Card(
+              child: ListTile(
+                contentPadding: EdgeInsets.only(left: 7.0),
+                leading: Image.network(
+                  ShoppingCart.tocart[index].image,
+                  width: 100.0,
+                  height: 100.0,
+                  fit: BoxFit.cover,
+                ),
+                title: Padding(
+                  padding: EdgeInsets.fromLTRB(0, 7, 0, 10),
+                  child: Text(
+                    ShoppingCart.tocart[index].title,
+                    style: TextStyle(
+                      fontSize: 16.5,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  new IconButton(
-                    icon: Icon(Icons.arrow_drop_down),
-                    onPressed: () {
-                      setState(() {
-                        if (ShoppingCart.qty[index] == 1) {
-
-                        } else {
-                          ShoppingCart.qty[index] -= 1;
-                        }
-                      });
-                    },
-                  ),
-                  new IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      setState(() {
-                        ShoppingCart.tocart.remove(ShoppingCart.tocart[index]);
-                        ShoppingCart.qty.removeAt(index);
-                        print(ShoppingCart.qty.length);
-                        clearQTY();
-                      });
-                    },
-                  ),
-                ],
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text('Price(1) :'),
+                    SizedBox(
+                      height: 3.0,
+                    ),
+                    Text(
+                      priceFormatter(ShoppingCart.tocart[index].price),
+                    )
+                  ],
+                ),
+                trailing: Wrap(
+                  direction: Axis.vertical,
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.arrow_drop_up),
+                      onPressed: () {
+                        setState(() {
+                          ShoppingCart.qty[index] += 1;
+                        });
+                      },
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(top: 15.0),
+                      child: Text(
+                        ShoppingCart.qty[index].toString(),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.arrow_drop_down),
+                      onPressed: () {
+                        setState(() {
+                          if (ShoppingCart.qty[index] == 1) {
+                          } else {
+                            ShoppingCart.qty[index] -= 1;
+                          }
+                        });
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: () {
+                        setState(() {
+                          ShoppingCart.tocart
+                              .remove(ShoppingCart.tocart[index]);
+                          ShoppingCart.qty.removeAt(index);
+                        });
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           );
@@ -121,24 +136,22 @@ class _ShoppingBasketState extends State<ShoppingBasket> {
                 title: Text('Total: '),
                 subtitle: Text(
                   priceFormatter(ShoppingCart.countTotalPrice()),
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
                 ),
               ),
             ),
             MaterialButton(
-              onPressed: (){
-                if(ShoppingCart.tocart.isEmpty){}
-                else
-                {
-                  Navigator.push(context,
-                    MaterialPageRoute(
-                        builder: (context) => CheckoutCart()
-                    ),
+              onPressed: () {
+                if (ShoppingCart.tocart.isEmpty) {
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CheckoutCart()),
                   );
                 }
-
               },
-              child: Text('Checkout',
+              child: Text(
+                'Checkout',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),

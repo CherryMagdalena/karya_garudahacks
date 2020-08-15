@@ -27,14 +27,13 @@ productListing(var thing) {
   return productList;
 }
 
-Column _buildButtonColumn(IconData icon) {
-  return Column(
-    mainAxisSize: MainAxisSize.min,
-    mainAxisAlignment: MainAxisAlignment.start,
-    children: [
-      Icon(icon),
-    ],
-  );
+Padding _buildButtonColumn(IconData icon) {
+  return Padding(
+      padding: EdgeInsets.only(right: 10.0),
+      child: Icon(
+        icon,
+        size: 25.0,
+      ));
 }
 
 class SearchScreenPosts extends StatefulWidget {
@@ -174,96 +173,106 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
             List<Product> productList = productListing(snapshot.data);
             List homeList = [];
 
-              bool finishedForLoop = false;
-                for(int i=0; i < productList.length; i++){
-                if(productList[i].category == widget.categoryFilter.category1 || productList[i].category == widget.categoryFilter.category2 || productList[i].category == widget.categoryFilter.category3){
-                  homeList.add(i);
-                }
-                if(i == productList.length-1){
-                  finishedForLoop = true;
-                }
+            bool finishedForLoop = false;
+            for (int i = 0; i < productList.length; i++) {
+              if (productList[i].category == widget.categoryFilter.category1 ||
+                  productList[i].category == widget.categoryFilter.category2 ||
+                  productList[i].category == widget.categoryFilter.category3) {
+                homeList.add(i);
               }
-              if(snapshot.connectionState != ConnectionState.waiting && finishedForLoop==false){
-                return Container();
+              if (i == productList.length - 1) {
+                finishedForLoop = true;
               }
-              return Expanded(///home screen layout home screen layout home screen layout
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: homeList.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        child: Column(
-                          children: <Widget>[
-                            //buildstack for image & price
-                            Stack(
-                              alignment: const Alignment(1.0, 0.9),
-                              children: [
-                                MaterialButton(
-                                  child:  Image.network(
-                                    productList[homeList[index]].image,///imagePath
-                                    width: 400,
-                                    height: 200,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ClickedPost(productList[homeList[index]])
-                                      ),
-                                    );
-                                  },
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.black45,
-                                  ),
-                                  child: Text(
-                                    priceFormatter(
-                                        productList[homeList[index]].price,
-                      ),
+            }
+            if (snapshot.connectionState != ConnectionState.waiting &&
+                finishedForLoop == false) {
+              return Container();
+            }
+            return Expanded(
+              ///home screen layout home screen layout home screen layout
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: homeList.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      child: Column(
+                        children: <Widget>[
+                          //buildstack for image & price
+                          Stack(
+                            alignment: const Alignment(1.0, 0.9),
+                            children: [
+                              MaterialButton(
+                                padding: EdgeInsets.all(0),
+                                child: Image.network(
+                                  productList[homeList[index]].image,
 
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
+                                  ///imagePath
+                                  width: double.infinity,
+                                  height: 300,
+                                  fit: BoxFit.cover,
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ClickedPost(
+                                            productList[homeList[index]])),
+                                  );
+                                },
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.black45,
+                                ),
+                                child: Text(
+                                  priceFormatter(
+                                    productList[homeList[index]].price,
+                                  ),
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
                                   ),
                                 ),
+                              ),
+                            ],
+                          ),
+                          //textSection
+                          Container(
+                            padding:
+                                const EdgeInsets.only(left: 20.0, top: 10.0),
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              productList[homeList[index]].description,
+                            ),
+                          ),
+                          //tagS
+                          Container(
+                            padding:
+                                const EdgeInsets.only(left: 20.0, top: 3.0),
+                            alignment: Alignment.centerLeft,
+                            child: Text('#tag1 #cool'),
+                          ),
+                          //button
+                          Container(
+                            padding: const EdgeInsets.only(
+                                left: 20.0, top: 8.0, bottom: 20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                _buildButtonColumn(Icons.star),
+                                _buildButtonColumn(Icons.comment),
+                                _buildButtonColumn(Icons.share),
                               ],
                             ),
-                            //textSection
-                            Container(
-                              padding:
-                              const EdgeInsets.only(left: 20.0, top: 20.0),
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                productList[homeList[index]].description,
-                              ),
-                            ),
-                            //tagS
-                            Container(
-                              padding: const EdgeInsets.only(left: 20.0),
-                              alignment: Alignment.centerLeft,
-                              child: Text('#tag1 #cool'),
-                            ),
-                            //button
-                            Container(
-                              padding:
-                              const EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  _buildButtonColumn(Icons.star),
-                                  _buildButtonColumn(Icons.comment),
-                                  _buildButtonColumn(Icons.share),
-                                ],
-                              ),
-                            ),
-                            Container(height: 9.5,), //spacing
-                          ],
-                        ),
-                      );
-                    }),
+                          ),
+                          Container(
+                            height: 9.5,
+                          ), //spacing
+                        ],
+                      ),
+                    );
+                  }),
             );
           }),
     );

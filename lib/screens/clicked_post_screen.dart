@@ -22,7 +22,6 @@ Column _buildButtonColumn(IconData icon) {
   );
 }
 
-
 class ClickedPost extends StatelessWidget {
   final Product products;
   ClickedPost(this.products);
@@ -56,9 +55,10 @@ class ClickedPost extends StatelessWidget {
         ],
       ),
       onPressed: () {
-        Navigator.push(context,
+        Navigator.push(
+          context,
           MaterialPageRoute(
-              builder: (context) => TheirProfileScreen(products.username),
+            builder: (context) => TheirProfileScreen(products.username),
           ),
         );
       },
@@ -222,7 +222,6 @@ class ClickedPost extends StatelessWidget {
           ],
         ),
       ),
-
     );
   }
 }

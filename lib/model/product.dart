@@ -14,7 +14,7 @@ class Product {
 List categoryList = [
   'Traditional Drawing',
   'DIY',
-  'Woodworking',
+  'Woodwork',
   'Digital Drawing',
   '3D Rendering',
   'Sculpture',

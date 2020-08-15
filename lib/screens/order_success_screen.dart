@@ -10,49 +10,46 @@ class OrderSuccess extends StatelessWidget {
     return Scaffold(
       backgroundColor: color4,
       body: Container(
-
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            MaterialButton(
-              onPressed: (){
-                Navigator.push(context,
-                  MaterialPageRoute(
-                    builder: (context) => HomeScreen(),
-                  ),
-                );
-              },
-              child: Container(
-                alignment: Alignment.center,
-                padding:
-                const EdgeInsets.all(45.0),
-                child: Text('SUCCESSFULLY PLACED ORDER',
-                  style: TextStyle(
-                    color: color1,
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-
-                  ),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          MaterialButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+                ),
+              );
+            },
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(45.0),
+              child: Text(
+                'SUCCESSFULLY PLACED ORDER',
+                style: TextStyle(
+                  color: color1,
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            MaterialButton(
-              onPressed: (){
-                Navigator.push(context,
-                  MaterialPageRoute(
-                    builder: (context) => HomeScreen(),
-                  ),
-                );
-              },
-              child: Icon(Icons.check_circle_outline,
+          ),
+          MaterialButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+                ),
+              );
+            },
+            child: Icon(
+              Icons.check_circle_outline,
               size: 150.0,
-                color: color1,
-              ),
-            )
-          ]
-        ),
+              color: color1,
+            ),
+          )
+        ]),
       ),
-
     );
   }
 }
