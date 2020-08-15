@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/screens/order_success_screen.dart';
 import 'package:karya_garudahacks/model/shopping_cart.dart';
+import 'package:karya_garudahacks/components/price_formatter.dart';
 
 class CheckoutCart extends StatelessWidget {
   clearCart(){
@@ -91,7 +92,10 @@ class CheckoutCart extends StatelessWidget {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      ShoppingCart.tocart[index].price.toString()
+                                      priceFormatter(
+                                          ShoppingCart.tocart[index].price
+                                      )
+
                                     ),
                                   ),
                                 ],
@@ -137,8 +141,11 @@ class CheckoutCart extends StatelessWidget {
             Expanded(
               child: ListTile(
                 title:Text('Total: '),
-                subtitle: Text('Rp. ' +
-                  ShoppingCart.countTotalPrice().toString(),
+                subtitle: Text(
+                  priceFormatter(
+                    ShoppingCart.countTotalPrice()
+                  ),
+
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),

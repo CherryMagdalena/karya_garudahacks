@@ -105,7 +105,7 @@ class _ShoppingBasketState extends State<ShoppingBasket> {
                       icon: Icon(Icons.delete),
                       onPressed: (){
                         setState(() {
-                          ShoppingCart.tocart.remove(products);
+                          ShoppingCart.tocart[index].remove();
                         });
                       },
                     ),
