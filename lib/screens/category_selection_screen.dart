@@ -31,7 +31,7 @@ class _CategorySelectionPageState extends State<CategorySelectionPage> {
             "Congratulations, you're in!",
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 30.0,
+              fontSize: 25.0,
               color: color2,
             ),
           ),
@@ -41,17 +41,18 @@ class _CategorySelectionPageState extends State<CategorySelectionPage> {
           margin: EdgeInsets.all(5.0),
           child: Column(
             children: <Widget>[
+              Container(height: 20,),//spacing
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(
                   'Choose 3 of your preferred categories.',
                   style: TextStyle(
                     color: color2,
-                    fontSize: 25.0,
+                    fontSize: 14.0,
                   ),
                 ),
               ),
-              Container(height: 15,),//spacing
+              Container(height: 20,),//spacing
               GridView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
