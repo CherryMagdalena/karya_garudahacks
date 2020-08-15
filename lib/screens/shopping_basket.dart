@@ -126,14 +126,19 @@ class _ShoppingBasketState extends State<ShoppingBasket> {
               ),
             ),
             MaterialButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CheckoutCart()),
-                );
+              onPressed: (){
+                if(ShoppingCart.tocart.isEmpty){}
+                else
+                {
+                  Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => CheckoutCart()
+                    ),
+                  );
+                }
+
               },
-              child: Text(
-                'Checkout',
+              child: Text('Checkout',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
