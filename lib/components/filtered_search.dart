@@ -202,7 +202,7 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
                 Expanded(///home screen layout home screen layout home screen layout
                   child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: profileList.length,
+                      itemCount: homeList.length,
                       itemBuilder: (context, index) {
                         return Container(
                           child: Column(
