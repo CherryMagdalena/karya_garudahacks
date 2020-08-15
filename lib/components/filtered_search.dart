@@ -183,17 +183,16 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
       child: FutureBuilder(
           future: getPosts(),
           builder: (_, snapshot){
-            List<Product> productList = productListing(snapshot.data);
-            List homeList = [];
             if(snapshot.connectionState == ConnectionState.waiting) {
               return Center(
                 child: Text(" "),
               );
-            } else {
+            }
+            List<Product> productList = productListing(snapshot.data);
+            List homeList = [];
               for(int i=0; i < productList.length; i++){
               if(productList[i].category == widget.categoryFilter.category1 || productList[i].category == widget.categoryFilter.category2 || productList[i].category == widget.categoryFilter.category3){
                 homeList.add(i);
-              }
             }
             }
 
