@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:karya_garudahacks/model/product.dart';
+import 'package:karya_garudahacks/screens/clicked_post_screen.dart';
 
 var firestore = Firestore.instance;
 Future getPosts() async{
@@ -23,6 +25,7 @@ productListing(var thing){
   return productList;
 }
 
+
 class SearchScreenPosts extends StatefulWidget {
   @override
   _SearchScreenPostsState createState() => _SearchScreenPostsState();
@@ -41,7 +44,32 @@ class _SearchScreenPostsState extends State<SearchScreenPosts> {
           }
           else{}
           List<Product> productList = productListing(snapshot.data);
-          return;
+          return Expanded(
+            child: GridView.count(
+              mainAxisSpacing: 5.0,
+              crossAxisSpacing: 5.0,
+              crossAxisCount: 3,
+              children: List.generate(productList.length, (index){
+                return RaisedButton(
+                  child: Image.network(
+                    productList[index].image,
+                    fit: BoxFit.cover,
+                  ),
+                  onPressed: (){
+                    /*Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ClickedPost(
+                              productList[index]
+                            )
+                      ),
+                    );*/
+                }
+                );
+              })
+            ),
+          );
         }
       ),
     );
