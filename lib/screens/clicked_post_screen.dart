@@ -36,7 +36,6 @@ class ClickedPost extends StatelessWidget {
           ),
           Text(
             products.username,
-           // products.username,
             textDirection: TextDirection.ltr,
             style: TextStyle(
               fontSize: 32,
