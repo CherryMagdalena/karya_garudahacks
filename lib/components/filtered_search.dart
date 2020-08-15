@@ -183,19 +183,21 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
       child: FutureBuilder(
         future: getPosts(),
         builder: (_, snapshot){
-          List<Product> productList = productListing(snapshot.data);
-          List homeList = [];
+
           if(snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: Text("Loading..."),
             );
           }
+          List<Product> productList = productListing(snapshot.data);
+          List homeList = [];
 
           for(int i=0; i < productList.length; i++){
             if(productList[i].category == widget.categoryFilter.category1 || productList[i].category == widget.categoryFilter.category2 || productList[i].category == widget.categoryFilter.category3){
               homeList.add(i);
             }
           }
+
 
           return Expanded(///home screen layout home screen layout home screen layout
                   child: ListView.builder(
@@ -241,8 +243,7 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
                               ),
                               //textSection
                               Container(
-                                padding:
-                                const EdgeInsets.only(left: 20.0, top: 20.0),
+                                padding: const EdgeInsets.only(left: 20.0, top: 20.0),
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   productList[homeList[index]].description,

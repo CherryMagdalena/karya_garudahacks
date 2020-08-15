@@ -32,7 +32,7 @@ class _PurchaseProductScreenState extends State<PurchaseProductScreen> {
                   categoryList[index],
                   style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                 ),
-                ProductCardListView()
+                ProductCardListView(categoryList[index]),
               ],
             );
           },
