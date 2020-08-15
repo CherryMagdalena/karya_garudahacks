@@ -33,6 +33,7 @@ class _UploadPageState extends State<UploadPage> {
           context: context,
           builder: (context){
            return Container(
+             height: 100,
              child: Column(
                children: [
                  //acquire image from camera
@@ -73,7 +74,7 @@ class _UploadPageState extends State<UploadPage> {
       // ignore: missing_return
       builder: (context, snapshot){
         PostData postData = snapshot.data;
-        Scaffold(
+        return Scaffold(
           backgroundColor: color4,
           appBar: AppBar(
             backgroundColor: color3,
@@ -152,7 +153,7 @@ class _UploadPageState extends State<UploadPage> {
                           child: Text(category),
                           value: category,
                         );
-                      }),
+                      }).toList(),
                       onChanged: (val) => setState(()=> category =val),
                     )
                 ),

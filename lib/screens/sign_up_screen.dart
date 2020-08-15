@@ -100,7 +100,7 @@ class _SignUpState extends State<SignUp> {
                         )
                       ),
                     TextSpan(
-                      text: 'Sign In',
+                      text: ' Sign In',
                       style: TextStyle(
                         color: color1,
                         fontWeight: FontWeight.bold
