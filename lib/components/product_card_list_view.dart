@@ -74,7 +74,7 @@ class _ProductCardListViewState extends State<ProductCardListView> {
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 padding: EdgeInsets.only(right: 5.0),
-                itemCount: productList.length,
+                itemCount: productCardList.length,
                 itemBuilder: (context, index) {
                   Product product = productList[productCardList[index]];
 
