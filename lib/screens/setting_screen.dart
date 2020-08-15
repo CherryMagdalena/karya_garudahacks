@@ -6,6 +6,9 @@ import 'package:karya_garudahacks/components/app_bar.dart';
 import 'package:karya_garudahacks/components/bottom_app_bar.dart';
 import 'package:karya_garudahacks/screens/profile_screen.dart';
 import 'package:karya_garudahacks/services/auth.dart';
+import 'package:karya_garudahacks/services/database.dart';
+import 'package:provider/provider.dart';
+import 'package:karya_garudahacks/model/user.dart';
 
 import 'login_signup_screen.dart';
 
@@ -13,7 +16,7 @@ class SettingScreen extends StatelessWidget {
   final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
-
+    final user = Provider.of<User>(context);
 
     Column settings() {
       return Column(
@@ -28,16 +31,20 @@ class SettingScreen extends StatelessWidget {
                     size: 40,
                   ),
                 ),
-                    Text(
-                      'INSERT USERNAME',
+                StreamBuilder(
+                  stream: DatabaseService(uid:user.uid).userData,
+                  builder: (context, snapshot){
+                    UserData userData = snapshot.data;
+                    return Text(
+                      userData.username,
                       textDirection: TextDirection.ltr,
                       style: TextStyle(
                         fontSize: 32,
                         color: Colors.black87,
                       ),
-                    ),
-
-
+                    );
+                  }
+                ),
               ]),
           _container('Profile', onClicked: () {
            //to profile screen
