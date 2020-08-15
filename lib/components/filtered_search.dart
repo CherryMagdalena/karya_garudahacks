@@ -181,99 +181,99 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
   Widget build(BuildContext context) {
     return Container(
       child: FutureBuilder(
-        future: getPosts(),
-        builder: (_, snapshot){
-
-          if(snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: Text("Loading..."),
-            );
-          }
-          List<Product> productList = productListing(snapshot.data);
-          List homeList = [];
-
-          for(int i=0; i < productList.length; i++){
-            if(productList[i].category == widget.categoryFilter.category1 || productList[i].category == widget.categoryFilter.category2 || productList[i].category == widget.categoryFilter.category3){
-              homeList.add(i);
+          future: getPosts(),
+          builder: (_, snapshot){
+            if(snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: Text(" "),
+              );
             }
-          }
+            List<Product> productList = productListing(snapshot.data);
+            List homeList = [];
+              for(int i=0; i < productList.length; i++){
+              if(productList[i].category == widget.categoryFilter.category1 || productList[i].category == widget.categoryFilter.category2 || productList[i].category == widget.categoryFilter.category3){
+                homeList.add(i);
+            }
+            }
 
+            
 
-          return Expanded(///home screen layout home screen layout home screen layout
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: homeList.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          child: Column(
-                            children: <Widget>[
-                              //buildstack for image & price
-                              Stack(
-                                alignment: const Alignment(1.0, 0.9),
-                                children: [
-                                  MaterialButton(
-                                    child:  Image.network(
-                                      productList[homeList[index]].image,///imagePath
-                                      width: 400,
-                                      height: 200,
-                                      fit: BoxFit.cover,
+            return Expanded(///home screen layout home screen layout home screen layout
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: homeList.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            child: Column(
+                              children: <Widget>[
+                                //buildstack for image & price
+                                Stack(
+                                  alignment: const Alignment(1.0, 0.9),
+                                  children: [
+                                    MaterialButton(
+                                      child:  Image.network(
+                                        productList[homeList[index]].image,///imagePath
+                                        width: 400,
+                                        height: 200,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      onPressed: () {
+                                        Navigator.push(context,
+                                          MaterialPageRoute(
+                                              builder: (context) => ClickedPost(productList[homeList[index]])
+                                          ),
+                                        );
+                                      },
                                     ),
-                                    onPressed: () {
-                                      Navigator.push(context,
-                                        MaterialPageRoute(
-                                            builder: (context) => ClickedPost(productList[homeList[index]])
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.black45,
+                                      ),
+                                      child: Text( 'Rp.' +
+                                          productList[homeList[index]].price.toString(),
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
                                         ),
-                                      );
-                                    },
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.black45,
-                                    ),
-                                    child: Text( 'Rp.' +
-                                        productList[homeList[index]].price.toString(),
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              //textSection
-                              Container(
-                                padding: const EdgeInsets.only(left: 20.0, top: 20.0),
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  productList[homeList[index]].description,
-                                ),
-                              ),
-                              //tagS
-                              Container(
-                                padding: const EdgeInsets.only(left: 20.0),
-                                alignment: Alignment.centerLeft,
-                                child: Text('#tag1 #cool'),
-                              ),
-                              //button
-                              Container(
-                                padding:
-                                const EdgeInsets.only(left: 20.0, top: 20.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    _buildButtonColumn(Icons.star),
-                                    _buildButtonColumn(Icons.comment),
-                                    _buildButtonColumn(Icons.share),
                                   ],
                                 ),
-                              ),
-                            ],
-                          ),
-                        );
-                      }),
-                );
-        }
+                                //textSection
+                                Container(
+                                  padding:
+                                  const EdgeInsets.only(left: 20.0, top: 20.0),
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    productList[homeList[index]].description,
+                                  ),
+                                ),
+                                //tagS
+                                Container(
+                                  padding: const EdgeInsets.only(left: 20.0),
+                                  alignment: Alignment.centerLeft,
+                                  child: Text('#tag1 #cool'),
+                                ),
+                                //button
+                                Container(
+                                  padding:
+                                  const EdgeInsets.only(left: 20.0, top: 20.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      _buildButtonColumn(Icons.star),
+                                      _buildButtonColumn(Icons.comment),
+                                      _buildButtonColumn(Icons.share),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
+            );
+          }
       ),
     );
   }

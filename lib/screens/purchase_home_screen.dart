@@ -36,9 +36,6 @@ class _PurchaseHomeScreenState extends State<PurchaseHomeScreen> {
                   .copyWith(fontWeight: FontWeight.bold),
             ),
             ProductCardListView(),
-            SizedBox(
-              height: 30.0,
-            ),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -93,7 +90,8 @@ class CategoryButton extends StatelessWidget {
         color: color2,
         child: Text(
           text,
-          style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 30.0, color: Colors.white, fontWeight: FontWeight.bold),
         ),
         onPressed: onClicked,
       ),

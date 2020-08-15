@@ -21,8 +21,6 @@ class HomeScreen extends StatelessWidget {
         body: StreamBuilder(///if you want to see your home screen layout code, head over to filtered_search.dart and CTRL+F for "home screen layout"
           stream: DatabaseService().postData,
           builder: (context, snapshot){
-            PostData postData = snapshot.data;
-            CategoryData categoryData = snapshot.data;
             return Container(
               child: Column(
                 children: [CategoryFilter(),]

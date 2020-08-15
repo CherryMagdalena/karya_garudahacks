@@ -36,7 +36,7 @@ class SettingScreen extends StatelessWidget {
                   builder: (context, snapshot){
                     UserData userData = snapshot.data;
                     return Text(
-                      userData.username,
+                      UserData == null ? '' : userData.username,
                       textDirection: TextDirection.ltr,
                       style: TextStyle(
                         fontSize: 32,
