@@ -25,7 +25,7 @@ productListing(var thing){
   return productList;
 }
 
-
+//search screen post generator
 class SearchScreenPosts extends StatefulWidget {
   @override
   _SearchScreenPostsState createState() => _SearchScreenPostsState();
@@ -50,24 +50,30 @@ class _SearchScreenPostsState extends State<SearchScreenPosts> {
               crossAxisSpacing: 5.0,
               crossAxisCount: 3,
               children: List.generate(productList.length, (index){
-                return RaisedButton(
-                  child: Image.network(
-                    productList[index].image,
-                    width: 500,
-                    height: 500,
-                    fit: BoxFit.cover,
-                  ),
-                  onPressed: (){
-                    /*Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ClickedPost(
-                              productList[index]
-                            )
+                return Stack(
+                  children: <Widget>[
+                    Container(
+                      child: Image.network(
+                        productList[index].image,
+                        //width: 500,
+                        //height: 500,
+                        fit: BoxFit.cover,
                       ),
-                    );*/
-                }
+                    ),
+                    MaterialButton(
+                    onPressed: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ClickedPost(
+                                productList[index]
+                              )
+                        ),
+                      );
+                  }
+                  ),
+                ]
                 );
               })
             ),
@@ -78,6 +84,7 @@ class _SearchScreenPostsState extends State<SearchScreenPosts> {
   }
 }
 
+//profile screen post generator
 class ProfileScreenPosts extends StatefulWidget {
   ProfileScreenPosts(this.profileFilter);
   String profileFilter;
@@ -97,30 +104,44 @@ class _ProfileScreenPostsState extends State<ProfileScreenPosts> {
           }
           else{}
           List<Product> productList = productListing(snapshot.data);
+          List userProducts = [];
+          //choose only the ones where its username matches the current profile
+          for(int i=0; i < productList.length; i++){
+            if(productList[i].username == widget.profileFilter){
+              userProducts.add(i);
+            }
+            else{}
+          }
           return Expanded(
             child: GridView.count(
               mainAxisSpacing: 5.0,
               crossAxisCount: 3,
               crossAxisSpacing: 5.0,
               children: List.generate(productList.length, (index){
-                return RaisedButton(
-                    child: Image.network(
-                      productList[index].image,
-                      width: 500,
-                      height: 500,
-                      fit: BoxFit.cover,
-                    ),
-                    onPressed: (){
-                      /*Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ClickedPost(
-                              productList[index]
-                            )
+                return Stack(
+                    children: <Widget>[
+                      Container(
+                        child: Image.network(
+                          productList[userProducts[index]].image,
+                          //width: 500,
+                          //height: 500,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    );*/
-                    }
+                      MaterialButton(
+                          onPressed: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ClickedPost(
+                                          productList[userProducts[index]]
+                                      )
+                              ),
+                            );
+                          }
+                      ),
+                    ]
                 );
               })
             ),
