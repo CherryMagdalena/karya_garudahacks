@@ -39,7 +39,7 @@ class DatabaseService {
   ///category
   //to update category data
   Future<void> updateCategoryData(String category1, String category2, String category3) async {
-    return await userCollection.document(uid).setData({
+    return await categoryCollection.document(uid).setData({
       'category1': category1,
       'category2': category2,
       'category3': category3,
@@ -58,7 +58,7 @@ class DatabaseService {
 
   //stream for category data
   Stream<CategoryData> get categoryData {
-    return userCollection.document(uid).snapshots().map(_categoryDataFromSS);
+    return categoryCollection.document(uid).snapshots().map(_categoryDataFromSS);
   }
 
   ///image acquisition

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
 import 'package:flutter/gestures.dart';
+import 'package:karya_garudahacks/screens/sign_up_screen_2.dart';
 import 'package:karya_garudahacks/services/auth.dart';
 import 'login_signup_screen.dart';
 
@@ -55,7 +56,8 @@ class _SignUpState extends State<SignUp> {
               SizedBox(height: 20.0),
               //password input
               TextFormField(
-                  decoration: textInputDecoration.copyWith(hintText: 'Email'),
+                  decoration: textInputDecoration.copyWith(hintText: 'Password'),
+                  obscureText: true,
                   validator: (val) => val.length < 8 ? 'Please enter a password with 8+ characters' : null,
                   onChanged: (val) {setState(()=> password = val);}
               ),
@@ -78,6 +80,10 @@ class _SignUpState extends State<SignUp> {
                       });
                     } else {
                       //navigate to next screen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context)=>SignUpData())
+                      );
                     }
                   }
                 },
