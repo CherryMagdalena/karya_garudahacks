@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
+import 'package:karya_garudahacks/screens/upload_page_screen.dart';
 
 class FloatingButton extends StatelessWidget {
   @override
@@ -11,7 +12,7 @@ class FloatingButton extends StatelessWidget {
       ),
       backgroundColor: color2,
       //Navigate to upload screen
-      //onPressed: () => ,
+      onPressed: () => UploadPage(),
     );
   }
 }
