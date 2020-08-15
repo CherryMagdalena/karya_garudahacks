@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/components/app_bar.dart';
 import 'package:karya_garudahacks/components/bottom_app_bar.dart';
+import 'package:karya_garudahacks/screens/profile_screen.dart';
 import 'package:karya_garudahacks/services/auth.dart';
 
 import 'login_signup_screen.dart';
@@ -40,6 +41,10 @@ class SettingScreen extends StatelessWidget {
               ]),
           _container('Profile', onClicked: () {
            //to profile screen
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfileScreen())
+            );
           }),
           _container('My Post'),
           _container('Purchases'),

@@ -50,11 +50,12 @@ class _SearchScreenPostsState extends State<SearchScreenPosts> {
               crossAxisSpacing: 5.0,
               crossAxisCount: 3,
               children: List.generate(productList.length, (index){
-                return RaisedButton(
+                return MaterialButton(
+                  padding: EdgeInsets.all(0.0),
                   child: Image.network(
                     productList[index].image,
-                    width: 500,
-                    height: 500,
+                    width: 900,
+                    height: 900,
                     fit: BoxFit.cover,
                   ),
                   onPressed: (){
