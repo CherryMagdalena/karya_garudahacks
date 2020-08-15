@@ -237,7 +237,7 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
                                   ),
                                   child: Text(
                                     priceFormatter(
-                        productList[homeList[index]].price,
+                                        productList[homeList[index]].price,
                       ),
 
                                     style: TextStyle(
@@ -277,6 +277,7 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
                                 ],
                               ),
                             ),
+                            Container(height: 9.5,), //spacing
                           ],
                         ),
                       );
