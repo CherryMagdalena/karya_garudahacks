@@ -107,5 +107,4 @@ class DatabaseService {
   Stream<PostData> get postData {
     return postCollection.document().snapshots().map(_postDataFromSS);
   }
-
 }
