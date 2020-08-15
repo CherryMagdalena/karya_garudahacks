@@ -79,7 +79,7 @@ class DatabaseService {
 
     var userName = await userCollection.document(uid).get();
 
-    return await userCollection.document().setData({
+    return await postCollection.document().setData({
       uid: uid,
       'username': userName['username'],
       'imagePath': imagePath,
@@ -107,5 +107,5 @@ class DatabaseService {
   Stream<PostData> get postData {
     return postCollection.document().snapshots().map(_postDataFromSS);
   }
-
+  
 }
