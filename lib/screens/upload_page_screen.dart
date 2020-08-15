@@ -103,79 +103,81 @@ class _UploadPageState extends State<UploadPage> {
               )
             ],
           ),
-          body: Container(
-            padding: EdgeInsets.all(12.5),
-            margin: EdgeInsets.all(7.5),
-            child: Column(
-              children: [
-                //container for the image and button to acquire image
-                imagePath == null
-                    ? Container(
-                  child: RaisedButton(
-                    color: color2,
-                    child: Column(
-                        children:[
-                          Icon(Icons.add, color: Colors.white,),
-                          VerticalDivider(width: 2.0,),
-                          Text(
-                            'Add Image',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          )
-                        ]
+          body: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.all(12.5),
+              margin: EdgeInsets.all(7.5),
+              child: Column(
+                children: [
+                  //container for the image and button to acquire image
+                  imagePath == null
+                      ? Container(
+                    child: RaisedButton(
+                      color: color2,
+                      child: Column(
+                          children:[
+                            Icon(Icons.add, color: Colors.white,),
+                            VerticalDivider(width: 2.0,),
+                            Text(
+                              'Add Image',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            )
+                          ]
+                      ),
+                      onPressed: (){
+                        //image acquisition
+                        imageAcquisition();
+                      },
                     ),
-                    onPressed: (){
-                      //image acquisition
-                      imageAcquisition();
-                    },
+                  )
+                      : Container(
+                    width: 500,
+                    height: 500,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(imagePath),
+                          fit: BoxFit.cover,
+                        )
+                    ),
                   ),
-                )
-                    : Container(
-                  width: 500,
-                  height: 500,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(imagePath),
-                        fit: BoxFit.cover,
+                  SizedBox(height: 20,),
+                  //dropdown menu for category selection
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: DropdownButton(
+                        hint: Text('Select category'),
+                        value: category,
+                        items: categoryList.map((category){
+                          return DropdownMenuItem(
+                            child: Text(category),
+                            value: category,
+                          );
+                        }).toList(),
+                        onChanged: (val) => setState(()=> category =val),
                       )
                   ),
-                ),
-                SizedBox(height: 20,),
-                //dropdown menu for category selection
-                Align(
-                    alignment: Alignment.topLeft,
-                    child: DropdownButton(
-                      hint: Text('Select category'),
-                      value: category,
-                      items: categoryList.map((category){
-                        return DropdownMenuItem(
-                          child: Text(category),
-                          value: category,
-                        );
-                      }).toList(),
-                      onChanged: (val) => setState(()=> category =val),
-                    )
-                ),
-                SizedBox(height: 20,),
-                //image/work title
-                TextField(
-                  decoration: textInputDecoration.copyWith(hintText: 'Title'),
-                  onChanged: (val) => setState(()=> title = val),
-                ),
-                SizedBox(height: 20,),
-                //image/work description
-                TextField(
-                  decoration: textInputDecoration.copyWith(hintText: 'Description'),
-                  onChanged: (val) => setState(()=> description = val),
-                ),
-                SizedBox(height: 20,),
-                //image/work price
-                TextField(
-                  decoration: textInputDecoration.copyWith(hintText: 'Price'),
-                  onChanged: (val) => setState(()=> price = int.parse(val)),
-                ),
-              ],
+                  SizedBox(height: 20,),
+                  //image/work title
+                  TextField(
+                    decoration: textInputDecoration.copyWith(hintText: 'Title'),
+                    onChanged: (val) => setState(()=> title = val),
+                  ),
+                  SizedBox(height: 20,),
+                  //image/work description
+                  TextField(
+                    decoration: textInputDecoration.copyWith(hintText: 'Description'),
+                    onChanged: (val) => setState(()=> description = val),
+                  ),
+                  SizedBox(height: 20,),
+                  //image/work price
+                  TextField(
+                    decoration: textInputDecoration.copyWith(hintText: 'Price'),
+                    onChanged: (val) => setState(()=> price = int.parse(val)),
+                  ),
+                ],
+              ),
             ),
           ),
         );
