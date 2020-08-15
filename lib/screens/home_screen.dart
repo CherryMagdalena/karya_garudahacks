@@ -1,5 +1,6 @@
 // Home Screen
 import 'package:flutter/material.dart';
+import 'package:karya_garudahacks/components/floating_button.dart';
 import 'package:karya_garudahacks/screens/clicked_post_screen.dart';
 import 'package:karya_garudahacks/components/app_bar.dart';
 import 'package:karya_garudahacks/components/bottom_app_bar.dart';
@@ -24,6 +25,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: color4,
         appBar: CustomAppBar(),
         bottomNavigationBar: CustomBottomAppBar(),
+        floatingActionButton: FloatingButton(),
         body: Container(
           child: Column(
             children: [

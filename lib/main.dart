@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/screens/login_signup_screen.dart';
+import 'package:karya_garudahacks/screens/home_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(HomeScreen());
 }
 
 class MyApp extends StatelessWidget {

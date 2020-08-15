@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/screens/checkout_screen_oneproduct.dart';
+import 'package:karya_garudahacks/model/colors.dart';
 
 class PurchaseConfirmation extends StatefulWidget {
   @override
@@ -31,11 +32,15 @@ class _PurchaseConfirmationState extends State<PurchaseConfirmation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: color4,
       appBar: AppBar(
+          iconTheme: IconThemeData(color: color1),
+          backgroundColor: color3,
+          elevation: 0,
           automaticallyImplyLeading: true,
           title: Text('Confirmation',
             style: TextStyle(
-              fontSize: 32,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
             ),)
       ),
@@ -62,6 +67,7 @@ class _PurchaseConfirmationState extends State<PurchaseConfirmation> {
               onPressed: _addCounter,
               ),
               Container(
+                padding: EdgeInsets.only(top: 15.0),
                 child: Text(_counter.toString(),
                 ),
               ),
@@ -75,6 +81,7 @@ class _PurchaseConfirmationState extends State<PurchaseConfirmation> {
       ),
 
       bottomNavigationBar: Container(
+        color: color3,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[

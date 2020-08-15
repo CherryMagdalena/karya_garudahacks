@@ -1,6 +1,7 @@
 // Clicked Post Screen : when post from home screen is clicked
 
 import 'package:flutter/material.dart';
+import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/screens/purchase_confirm_page.dart';
 import 'package:karya_garudahacks/components/app_bar.dart';
 import 'package:karya_garudahacks/components/bottom_app_bar.dart';
@@ -90,6 +91,7 @@ class ClickedPost extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           MaterialButton(
+            color:color2,
             onPressed: (){
               Navigator.push(context,
               MaterialPageRoute(
@@ -98,10 +100,10 @@ class ClickedPost extends StatelessWidget {
               );
             },
             child: Text('Purchase',
-              style: TextStyle(color: Colors.white, fontSize: 20.0),
+              style: TextStyle( color: Colors.white, fontSize: 20.0),
             ),
           ),
-          Text('Add to Cart', style: TextStyle(color: Colors.white, fontSize: 20.0),
+          Text('Add to Cart', style: TextStyle( color: Colors.white, fontSize: 20.0),
           ),
         ],
       ),
@@ -131,6 +133,11 @@ class ClickedPost extends StatelessWidget {
           ),
           Expanded(
             child: Container(
+              margin: EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: color2,
+                borderRadius: BorderRadius.all(Radius.circular(15.0)),
+              ),
               child: Column(
                 children: [
                   Text('User123',
@@ -157,6 +164,7 @@ class ClickedPost extends StatelessWidget {
     );
 
     return Scaffold(
+      backgroundColor: color4,
       appBar: CustomAppBar(),
       bottomNavigationBar: CustomBottomAppBar(),
       body: Column(
