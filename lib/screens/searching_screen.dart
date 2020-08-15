@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/components/app_bar.dart';
 import 'package:karya_garudahacks/components/bottom_app_bar.dart';
 import 'package:karya_garudahacks/model/colors.dart';
+import 'package:karya_garudahacks/components/filtered_search.dart';
 
 
 class SearchScreen extends StatefulWidget {
@@ -87,7 +88,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ],
             ),
             Container(height:9,), //spacing
-            ///ListLink!!!
+            SearchScreenPosts(),
           ],
         ),
       ),
