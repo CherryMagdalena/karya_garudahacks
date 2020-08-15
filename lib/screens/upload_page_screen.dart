@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/model/product.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:karya_garudahacks/model/user.dart';
+import 'package:karya_garudahacks/services/database.dart';
+import 'dart:io';
 
 const textInputDecoration = InputDecoration(
   fillColor: Colors.white,
@@ -18,7 +22,7 @@ class UploadPage extends StatefulWidget {
 }
 
 class _UploadPageState extends State<UploadPage> {
-  String imagePath, category, title, description;
+  String imagePath, category, title, description, uid;
   int price;
 
   @override
@@ -33,7 +37,13 @@ class _UploadPageState extends State<UploadPage> {
                children: [
                  //acquire image from camera
                  FlatButton.icon(
-                     onPressed: (){
+                     onPressed: () async {
+                       File file =
+                           await ImagePicker.pickImage(source: ImageSource.camera);
+                       imagePath = await DatabaseService.uploadImage(file);
+
+                       setState(() {});
+                       Navigator.pop(context);
                      },
                      icon: Icon(Icons.camera_alt),
                      label: Text('Camera')
@@ -41,7 +51,13 @@ class _UploadPageState extends State<UploadPage> {
 
                  //acquire image from gallery
                  FlatButton.icon(
-                     onPressed: (){
+                     onPressed: () async {
+                       File file =
+                       await ImagePicker.pickImage(source: ImageSource.gallery);
+                       imagePath = await DatabaseService.uploadImage(file);
+
+                       setState(() {});
+                       Navigator.pop(context);
                      },
                      icon: Icon(Icons.folder),
                      label: Text('Gallery')
@@ -52,102 +68,117 @@ class _UploadPageState extends State<UploadPage> {
           });
     }
 
-    return Scaffold(
-      backgroundColor: color4,
-      appBar: AppBar(
-        backgroundColor: color3,
-        title: Text('Upload your work'),
-        actions: [
-          FlatButton.icon(
-              icon: Icon(
+    return StreamBuilder(
+      stream: DatabaseService().postData,
+      // ignore: missing_return
+      builder: (context, snapshot){
+        PostData postData = snapshot.data;
+        Scaffold(
+          backgroundColor: color4,
+          appBar: AppBar(
+            backgroundColor: color3,
+            title: Text('Upload your work'),
+            actions: [
+              FlatButton.icon(
+                icon: Icon(
                   Icons.file_upload,
                   color: color1,
-              ),
-              label: Text(
+                ),
+                label: Text(
                   'Upload',
                   style: TextStyle(color: color1),
-              ),
-              onPressed: (){
-                //upload image to firebase storage
-              },
-          )
-        ],
-      ),
-      body: Container(
-        padding: EdgeInsets.all(12.5),
-        margin: EdgeInsets.all(7.5),
-        child: Column(
-          children: [
-            //container for the image and button to acquire image
-            imagePath == null
-                ? Container(
-              child: RaisedButton(
-                color: color2,
-                child: Column(
-                  children:[
-                    Icon(Icons.add, color: Colors.white,),
-                    VerticalDivider(width: 2.0,),
-                    Text(
-                      'Add Image',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    )
-                  ]
                 ),
-                onPressed: (){
-                  //image acquisition
-                  imageAcquisition();
+                onPressed: () async {
+                  //upload image to firebase
+                  await DatabaseService().updatePostData(
+                      uid ?? uid,
+                      imagePath ?? postData.imagePath,
+                      category ?? postData.category,
+                      title ?? postData.title,
+                      description ?? postData.description,
+                      price ?? postData.price);
+                  Navigator.pop(context);
                 },
-              ),
-            )
-                : Container(
-              width: 500,
-              height: 500,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(imagePath),
-                  fit: BoxFit.cover,
-                )
-              ),
-            ),
-            SizedBox(height: 20,),
-            //dropdown menu for category selection
-            Align(
-              alignment: Alignment.topLeft,
-              child: DropdownButton(
-                  hint: Text('Select category'),
-                  value: category,
-                  items: categoryList.map((category){
-                    return DropdownMenuItem(
-                      child: Text(category),
-                      value: category,
-                    );
-                  }),
-                  onChanged: (val) => setState(()=> category =val),
               )
+            ],
+          ),
+          body: Container(
+            padding: EdgeInsets.all(12.5),
+            margin: EdgeInsets.all(7.5),
+            child: Column(
+              children: [
+                //container for the image and button to acquire image
+                imagePath == null
+                    ? Container(
+                  child: RaisedButton(
+                    color: color2,
+                    child: Column(
+                        children:[
+                          Icon(Icons.add, color: Colors.white,),
+                          VerticalDivider(width: 2.0,),
+                          Text(
+                            'Add Image',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          )
+                        ]
+                    ),
+                    onPressed: (){
+                      //image acquisition
+                      imageAcquisition();
+                    },
+                  ),
+                )
+                    : Container(
+                  width: 500,
+                  height: 500,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(imagePath),
+                        fit: BoxFit.cover,
+                      )
+                  ),
+                ),
+                SizedBox(height: 20,),
+                //dropdown menu for category selection
+                Align(
+                    alignment: Alignment.topLeft,
+                    child: DropdownButton(
+                      hint: Text('Select category'),
+                      value: category,
+                      items: categoryList.map((category){
+                        return DropdownMenuItem(
+                          child: Text(category),
+                          value: category,
+                        );
+                      }),
+                      onChanged: (val) => setState(()=> category =val),
+                    )
+                ),
+                SizedBox(height: 20,),
+                //image/work title
+                TextField(
+                  decoration: textInputDecoration.copyWith(hintText: 'Title'),
+                  onChanged: (val) => setState(()=> title = val),
+                ),
+                SizedBox(height: 20,),
+                //image/work description
+                TextField(
+                  decoration: textInputDecoration.copyWith(hintText: 'Description'),
+                  onChanged: (val) => setState(()=> description = val),
+                ),
+                SizedBox(height: 20,),
+                //image/work price
+                TextField(
+                  decoration: textInputDecoration.copyWith(hintText: 'Price'),
+                  onChanged: (val) => setState(()=> price = int.parse(val)),
+                ),
+              ],
             ),
-            SizedBox(height: 20,),
-            //image/work title
-            TextField(
-              decoration: textInputDecoration.copyWith(hintText: 'Title'),
-              onChanged: (val) => setState(()=> title = val),
-            ),
-            SizedBox(height: 20,),
-            //image/work description
-            TextField(
-              decoration: textInputDecoration.copyWith(hintText: 'Description'),
-              onChanged: (val) => setState(()=> description = val),
-            ),
-            SizedBox(height: 20,),
-            //image/work price
-            TextField(
-              decoration: textInputDecoration.copyWith(hintText: 'Price'),
-              onChanged: (val) => setState(()=> price = int.parse(val)),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      }
     );
   }
 }
