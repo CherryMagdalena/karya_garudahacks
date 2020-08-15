@@ -4,11 +4,13 @@ import 'package:karya_garudahacks/screens/shopping_basket.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
-  CustomAppBar({this.height = kToolbarHeight});
+  final String title;
+  CustomAppBar({this.height = kToolbarHeight, this.title = ""});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      title: Text(title),
       iconTheme: IconThemeData(color: color1),
       backgroundColor: color3,
       elevation: 0,
@@ -20,10 +22,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             icon: Icon(Icons.shopping_basket),
             color: color1,
             onPressed: () {
-              Navigator.push(context,
-                MaterialPageRoute(
-                    builder: (context) => ShoppingBasket()
-                ),
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ShoppingBasket()),
               );
             },
           ),

@@ -14,7 +14,9 @@ class _PurchaseCommissionsScreenState extends State<PurchaseCommissionsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(
+        title: "Commissions",
+      ),
       bottomNavigationBar: CustomBottomAppBar(),
       body: Center(
         child: SizedBox(
@@ -51,7 +53,8 @@ class CategoryButton extends StatelessWidget {
         color: color2,
         child: Text(
           name,
-          style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: Colors.white, fontSize: 25.0, fontWeight: FontWeight.bold),
         ),
         onPressed: () {
           //Pass category to the next page

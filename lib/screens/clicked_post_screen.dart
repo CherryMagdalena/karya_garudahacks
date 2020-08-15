@@ -1,5 +1,6 @@
 // Clicked Post Screen : when post from home screen is clicked
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/screens/purchase_confirm_page.dart';
@@ -20,7 +21,6 @@ Column _buildButtonColumn(IconData icon) {
   );
 }
 
-
 class ClickedPost extends StatelessWidget {
   final Product products;
   ClickedPost(this.products);
@@ -28,94 +28,99 @@ class ClickedPost extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget profile = Container(
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.all(15),
       child: Row(
         children: [
-          Icon(
-            Icons.person,
-            size: 40,
+          Container(
+            height: 50.0,
+            width: 50.0,
+            decoration: BoxDecoration(shape: BoxShape.circle, color: color2),
+            child: Icon(
+              Icons.person,
+              size: 40,
+            ),
           ),
-          Text(
-            products.username,
-            textDirection: TextDirection.ltr,
-            style: TextStyle(
-              fontSize: 32,
-              color: Colors.black87,
-          ),
+          Padding(
+            padding: EdgeInsets.only(left: 10.0),
+            child: Text(
+              products.username,
+              textDirection: TextDirection.ltr,
+              style: TextStyle(
+                fontSize: 32,
+                color: Colors.black87,
+              ),
+            ),
           ),
         ],
       ),
     );
 
     Widget titleSection = Container(
-      padding: EdgeInsets.only(left:20.0, top: 20.0),
+      padding: EdgeInsets.only(left: 20.0, top: 15.0),
       alignment: Alignment.centerLeft,
       child: Text(
         products.title,
         textDirection: TextDirection.ltr,
         style: TextStyle(
-          fontSize: 18,
-          color: Colors.black87,
-        ),
+            fontSize: 28, color: Colors.black87, fontWeight: FontWeight.bold),
       ),
     );
 
     Widget price = Container(
-      padding: EdgeInsets.only(left: 20.0),
+      padding: EdgeInsets.fromLTRB(20.0, 3.0, 0, 5),
       alignment: Alignment.centerLeft,
-      child: Text(priceFormatter(
-          products.price
-      )
-
+      child: Text(
+        priceFormatter(products.price),
+        style: TextStyle(fontSize: 20.0),
       ),
     );
 
     Widget buttons = Container(
-      padding: EdgeInsets.only(left:20.0, top:10.0),
+      padding: EdgeInsets.only(left: 20.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           _buildButtonColumn(Icons.star), //like button
-          SizedBox(width: 7.5,),
+          SizedBox(
+            width: 7.5,
+          ),
           _buildButtonColumn(Icons.share) //share button
         ],
       ),
     );
 
     Widget buynadd = Container(
-      padding: EdgeInsets.only(left: 20.0, top: 20.0),
+      padding: EdgeInsets.only(left: 20.0, top: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           MaterialButton(
-
-
-            color:color2,
-            onPressed: (){
-              Navigator.push(context,
-              MaterialPageRoute(
-                builder: (context) => PurchaseConfirmation(this.products)
-              ),
+            color: color2,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => PurchaseConfirmation(this.products)),
               );
             },
-            child: Text('Purchase',
-              style: TextStyle( color: Colors.white, fontSize: 20.0),
+            child: Text(
+              'Purchase',
+              style: TextStyle(color: Colors.white, fontSize: 20.0),
             ),
           ),
           MaterialButton(
-
-
-            color:color2,
-            onPressed: (){
+            color: color2,
+            onPressed: () {
               ShoppingCart.tocart.add(products);
               ShoppingCart.qty.add(1);
-              Navigator.push(context,
-                MaterialPageRoute(
-                    builder: (context) => ShoppingBasket()
-                ),
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ShoppingBasket()),
               );
             },
-            child: Text('Add to Cart', style: TextStyle( color: Colors.white, fontSize: 20.0),
+            child: Text(
+              'Add to Cart',
+              style: TextStyle(color: Colors.white, fontSize: 20.0),
             ),
           ),
         ],
@@ -123,22 +128,23 @@ class ClickedPost extends StatelessWidget {
     );
 
     Widget comment = Container(
-      padding: EdgeInsets.only(left:20.0, top: 40.0),
+      padding: EdgeInsets.only(left: 20.0, top: 15.0),
       alignment: Alignment.centerLeft,
-      child: Text('Comments',
+      child: Text(
+        'Comments',
         textDirection: TextDirection.ltr,
         style: TextStyle(
-          fontSize: 18,
-          color: Colors.black87,
-        ),
+            fontSize: 20, color: Colors.black87, fontWeight: FontWeight.bold),
       ),
     );
 
     Widget commentsect = Container(
+      height: 90.0,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
+            padding: EdgeInsets.only(left: 10.0),
             child: Icon(
               Icons.person,
               size: 40,
@@ -147,21 +153,29 @@ class ClickedPost extends StatelessWidget {
           Expanded(
             child: Container(
               margin: EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(10.0),
               decoration: BoxDecoration(
                 color: color2,
                 borderRadius: BorderRadius.all(Radius.circular(15.0)),
               ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('User123',
+                  Text(
+                    'User123',
                     textDirection: TextDirection.ltr,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 20,
                       color: Colors.black87,
                     ),
                   ),
-                  Text('Wow, Awesome!',
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  Text(
+                    'Wow, this is so cool! AWESOME!',
                     textDirection: TextDirection.ltr,
                     style: TextStyle(
                       fontSize: 18,
@@ -186,8 +200,8 @@ class ClickedPost extends StatelessWidget {
             profile,
             Image.network(
               products.image,
-              width: 400,
-              height: 200,
+              width: double.infinity,
+              height: 285,
               fit: BoxFit.cover,
             ),
             titleSection,
@@ -199,7 +213,6 @@ class ClickedPost extends StatelessWidget {
           ],
         ),
       ),
-
     );
   }
 }

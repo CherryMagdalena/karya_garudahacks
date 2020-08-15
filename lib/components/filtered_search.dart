@@ -7,14 +7,14 @@ import 'package:karya_garudahacks/model/user.dart';
 import 'package:karya_garudahacks/components/price_formatter.dart';
 
 var firestore = Firestore.instance;
-Future getPosts() async{
+Future getPosts() async {
   QuerySnapshot qn = await firestore.collection('posts').getDocuments();
   return qn.documents;
 }
 
-productListing(var thing){
+productListing(var thing) {
   List<Product> productList = [];
-  for(int i=0; i < thing.length; i++){
+  for (int i = 0; i < thing.length; i++) {
     productList.add(Product(
       username: thing[i].data['username'],
       category: thing[i].data['category'],
@@ -37,56 +37,47 @@ Column _buildButtonColumn(IconData icon) {
   );
 }
 
-
 class SearchScreenPosts extends StatefulWidget {
   @override
   _SearchScreenPostsState createState() => _SearchScreenPostsState();
 }
 
 class _SearchScreenPostsState extends State<SearchScreenPosts> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
       child: FutureBuilder(
-        future: getPosts(),
-        builder: (_, snapshot){
-          if(snapshot.connectionState == ConnectionState.waiting){
-            return Text(''); //change with loading screen later? maybe
-          }
-          else{}
-          List<Product> productList = productListing(snapshot.data);
-          return Expanded(
-            child: GridView.count(
-              mainAxisSpacing: 5.0,
-              crossAxisSpacing: 5.0,
-              crossAxisCount: 3,
-              children: List.generate(productList.length, (index){
-                return RaisedButton(
-                  padding: EdgeInsets.all(0.0),
-                  child: Image.network(
-                    productList[index].image,
-                    width: 500,
-                    height: 500,
-                    fit: BoxFit.cover,
-                  ),
-                  onPressed: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ClickedPost(
-                              productList[index]
-                            )
-                      ),
-                    );
-                }
-                );
-              })
-            ),
-          );
-        }
-      ),
+          future: getPosts(),
+          builder: (_, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Text(''); //change with loading screen later? maybe
+            } else {}
+            List<Product> productList = productListing(snapshot.data);
+            return Expanded(
+              child: GridView.count(
+                  mainAxisSpacing: 5.0,
+                  crossAxisSpacing: 5.0,
+                  crossAxisCount: 3,
+                  children: List.generate(productList.length, (index) {
+                    return RaisedButton(
+                        padding: EdgeInsets.all(0.0),
+                        child: Image.network(
+                          productList[index].image,
+                          width: 500,
+                          height: 500,
+                          fit: BoxFit.cover,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ClickedPost(productList[index])),
+                          );
+                        });
+                  })),
+            );
+          }),
     );
   }
 }
@@ -103,72 +94,63 @@ class _ProfileScreenPostsState extends State<ProfileScreenPosts> {
   Widget build(BuildContext context) {
     return Container(
       child: FutureBuilder(
-        future: getPosts(),
-        builder: (_, snapshot){
-          if(snapshot.connectionState == ConnectionState.waiting){
-            return Text(''); //change with loading screen later? maybe
-          }
-
-          List<Product> productList = productListing(snapshot.data);
-          List profileList = [];
-
-          for(int i=0; i < productList.length; i++){
-            if(productList[i].username == widget.profileFilter){
-              profileList.add(i);
+          future: getPosts(),
+          builder: (_, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Text(''); //change with loading screen later? maybe
             }
-          }
 
-          if(profileList.length == 0){
-            return Container(
-              child: Center(
-                child: Text(
-                  'There are no posts yet.',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 25,
+            List<Product> productList = productListing(snapshot.data);
+            List profileList = [];
+
+            for (int i = 0; i < productList.length; i++) {
+              if (productList[i].username == widget.profileFilter) {
+                profileList.add(i);
+              }
+            }
+
+            if (profileList.length == 0) {
+              return Container(
+                child: Center(
+                  child: Text(
+                    'There are no posts yet.',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 25,
+                    ),
                   ),
                 ),
-              ),
-            );
-          }
-
-          else{
-            return Expanded(
-              child: GridView.count(
-              mainAxisSpacing: 5.0,
-              crossAxisCount: 3,
-              crossAxisSpacing: 5.0,
-              children: List.generate(productList.length, (index){
-                return RaisedButton(
-                    padding: EdgeInsets.all(0.0),
-                    child: Image.network(
-                      productList[index].image,
-                      width: 500,
-                      height: 500,
-                      fit: BoxFit.cover,
-                    ),
-                    onPressed: (){
-                      Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ClickedPost(
-                              productList[index]
-                            )
-                      ),
-                    );
-                    }
-                );
-              })
-            ),
-          );}
-        }
-      ),
+              );
+            } else {
+              return Expanded(
+                child: GridView.count(
+                    mainAxisSpacing: 5.0,
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 5.0,
+                    children: List.generate(productList.length, (index) {
+                      return RaisedButton(
+                          padding: EdgeInsets.all(0.0),
+                          child: Image.network(
+                            productList[index].image,
+                            width: 500,
+                            height: 500,
+                            fit: BoxFit.cover,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ClickedPost(productList[index])),
+                            );
+                          });
+                    })),
+              );
+            }
+          }),
     );
   }
 }
-
-
 
 class HomeScreenPosts extends StatefulWidget {
   HomeScreenPosts(this.categoryFilter);
@@ -183,107 +165,113 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
     return Container(
       child: FutureBuilder(
           future: getPosts(),
-          builder: (_, snapshot){
-            if(snapshot.connectionState == ConnectionState.waiting) {
+          builder: (_, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
                 child: Text(" "),
               );
             }
-              List<Product> productList = productListing(snapshot.data);
-              List homeList = [];
+            List<Product> productList = productListing(snapshot.data);
+            List homeList = [];
 
-              bool finishedForLoop = false;
-                for(int i=0; i < productList.length; i++){
-                if(productList[i].category == widget.categoryFilter.category1 || productList[i].category == widget.categoryFilter.category2 || productList[i].category == widget.categoryFilter.category3){
-                  homeList.add(i);
-                }
-                if(i == productList.length-1){
-                  finishedForLoop = true;
-                }
+            bool finishedForLoop = false;
+            for (int i = 0; i < productList.length; i++) {
+              if (productList[i].category == widget.categoryFilter.category1 ||
+                  productList[i].category == widget.categoryFilter.category2 ||
+                  productList[i].category == widget.categoryFilter.category3) {
+                homeList.add(i);
               }
-              if(snapshot.connectionState != ConnectionState.waiting && finishedForLoop==false){
-                return Container();
+              if (i == productList.length - 1) {
+                finishedForLoop = true;
               }
-              return Expanded(///home screen layout home screen layout home screen layout
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: homeList.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        child: Column(
-                          children: <Widget>[
-                            //buildstack for image & price
-                            Stack(
-                              alignment: const Alignment(1.0, 0.9),
+            }
+            if (snapshot.connectionState != ConnectionState.waiting &&
+                finishedForLoop == false) {
+              return Container();
+            }
+            return Expanded(
+              ///home screen layout home screen layout home screen layout
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: homeList.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      child: Column(
+                        children: <Widget>[
+                          //buildstack for image & price
+                          Stack(
+                            alignment: const Alignment(1.0, 0.9),
+                            children: [
+                              MaterialButton(
+                                child: Image.network(
+                                  productList[homeList[index]].image,
+
+                                  ///imagePath
+                                  width: double.infinity,
+                                  height: 200,
+                                  fit: BoxFit.cover,
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ClickedPost(
+                                            productList[homeList[index]])),
+                                  );
+                                },
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.black45,
+                                ),
+                                child: Text(
+                                  priceFormatter(
+                                    productList[homeList[index]].price,
+                                  ),
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          //textSection
+                          Container(
+                            padding:
+                                const EdgeInsets.only(left: 20.0, top: 15.0),
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              productList[homeList[index]].description,
+                            ),
+                          ),
+                          //tagS
+                          Container(
+                            padding:
+                                const EdgeInsets.only(left: 20.0, top: 5.0),
+                            alignment: Alignment.centerLeft,
+                            child: Text('#tag1 #cool'),
+                          ),
+                          //button
+                          Container(
+                            padding: const EdgeInsets.only(
+                                left: 20.0, top: 7.0, bottom: 20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                MaterialButton(
-                                  child:  Image.network(
-                                    productList[homeList[index]].image,///imagePath
-                                    width: 400,
-                                    height: 200,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ClickedPost(productList[homeList[index]])
-                                      ),
-                                    );
-                                  },
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.black45,
-                                  ),
-                                  child: Text(
-                                    priceFormatter(
-                        productList[homeList[index]].price,
-                      ),
-
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
+                                _buildButtonColumn(Icons.star),
+                                _buildButtonColumn(Icons.comment),
+                                _buildButtonColumn(Icons.share),
                               ],
                             ),
-                            //textSection
-                            Container(
-                              padding:
-                              const EdgeInsets.only(left: 20.0, top: 20.0),
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                productList[homeList[index]].description,
-                              ),
-                            ),
-                            //tagS
-                            Container(
-                              padding: const EdgeInsets.only(left: 20.0),
-                              alignment: Alignment.centerLeft,
-                              child: Text('#tag1 #cool'),
-                            ),
-                            //button
-                            Container(
-                              padding:
-                              const EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  _buildButtonColumn(Icons.star),
-                                  _buildButtonColumn(Icons.comment),
-                                  _buildButtonColumn(Icons.share),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
             );
-          }
-      ),
+          }),
     );
   }
 }

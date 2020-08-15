@@ -4,33 +4,6 @@ import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/screens/clicked_post_screen.dart';
 import 'package:karya_garudahacks/components/price_formatter.dart';
 import 'package:karya_garudahacks/components/filtered_search.dart';
-//Sample
-/*List productList = [
-  Product(
-      username: 'personA',
-      category: 'sculpture',
-      image:
-          'https://upload.wikimedia.org/wikipedia/commons/e/e2/Nok_sculpture_Louvre_70-1998-11-1.jpg',
-      title: 'Unique Sculpture',
-      description: 'desc',
-      price: 320800),
-  Product(
-      username: 'personB',
-      category: 'painting',
-      image:
-          'https://cdn.pixabay.com/photo/2018/05/20/03/36/watercolor-3414923_960_720.jpg',
-      title: 'Watercolor',
-      description: 'desc',
-      price: 20000),
-  Product(
-      username: 'personC',
-      category: 'wayang',
-      image:
-          'https://upload.wikimedia.org/wikipedia/commons/9/99/Wayang_sejarah.jpg',
-      title: 'Wayang',
-      description: 'desc',
-      price: 100000)
-];*/
 
 class ProductCardListView extends StatefulWidget {
   ProductCardListView(this.category);
@@ -48,28 +21,28 @@ class _ProductCardListViewState extends State<ProductCardListView> {
           builder: (_, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Text(''); //change with loading screen later? maybe
-            }
-            else {}
+            } else {}
             List<Product> productList = productListing(snapshot.data);
             List productCardList = [];
 
             bool finishedForLoop = false;
-            for(int i=0; i < productList.length; i++){
-              if(widget.category == 'null' || productList[i].category == widget.category){
+            for (int i = 0; i < productList.length; i++) {
+              if (widget.category == 'null' ||
+                  productList[i].category == widget.category) {
                 productCardList.add(i);
               }
-              if(i == productList.length-1){
+              if (i == productList.length - 1) {
                 finishedForLoop = true;
               }
             }
 
-            if(snapshot.connectionState != ConnectionState.waiting && finishedForLoop==false){
+            if (snapshot.connectionState != ConnectionState.waiting &&
+                finishedForLoop == false) {
               return Text('');
             }
 
-
             return Container(
-              margin: EdgeInsets.all(15.0),
+              margin: EdgeInsets.all(10.0),
               height: 250.0,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
@@ -89,8 +62,7 @@ class _ProductCardListViewState extends State<ProductCardListView> {
                 },
               ),
             );
-          }
-    ),
+          }),
     );
   }
 }
@@ -112,8 +84,8 @@ class ProductCard extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.only(bottom: 10.0),
-            height: 170.0,
-            width: 170.0,
+            height: 150.0,
+            width: 150.0,
             decoration: BoxDecoration(
                 color: color2,
                 borderRadius: BorderRadius.circular(20.0),

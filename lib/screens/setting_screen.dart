@@ -22,38 +22,33 @@ class SettingScreen extends StatelessWidget {
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Row(mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(right: 15.0),
-                  child: Icon(
-                    Icons.people,
-                    size: 40,
-                  ),
-                ),
-                StreamBuilder(
-                  stream: DatabaseService(uid:user.uid).userData,
-                  builder: (context, snapshot){
-                    UserData userData = snapshot.data;
-                    return Text(
-                      UserData == null ? '' : userData.username,
-                      textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        fontSize: 32,
-                        color: Colors.black87,
-                      ),
-                    );
-                  }
-                ),
-              ]),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Padding(
+              padding: EdgeInsets.only(right: 15.0),
+              child: Icon(
+                Icons.people,
+                size: 40,
+              ),
+            ),
+            StreamBuilder(
+                stream: DatabaseService(uid: user.uid).userData,
+                builder: (context, snapshot) {
+                  UserData userData = snapshot.data;
+                  return Text(
+                    UserData == null ? '' : userData.username,
+                    textDirection: TextDirection.ltr,
+                    style: TextStyle(
+                      fontSize: 32,
+                      color: Colors.black87,
+                    ),
+                  );
+                }),
+          ]),
           _container('Profile', onClicked: () {
-           //to profile screen
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfileScreen())
-            );
+            //to profile screen
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ProfileScreen()));
           }),
-          _container('My Post'),
           _container('Purchases'),
           _container('My Likes'),
           _container('Setting'),
@@ -61,9 +56,7 @@ class SettingScreen extends StatelessWidget {
             //log out
             await _auth.signOut();
             await Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context)=> LogIn())
-            );
+                context, MaterialPageRoute(builder: (context) => LogIn()));
           }),
         ],
       );
@@ -82,6 +75,7 @@ class SettingScreen extends StatelessWidget {
       onTap: onClicked,
       child: Container(
         width: 200.0,
+        height: 40.0,
         padding: EdgeInsets.all(5.0),
         decoration: BoxDecoration(
           color: color2,

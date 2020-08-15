@@ -32,8 +32,8 @@ class _PurchaseHomeScreenState extends State<PurchaseHomeScreen> {
               'Newest ',
               style: Theme.of(context)
                   .textTheme
-                  .headline5
-                  .copyWith(fontWeight: FontWeight.bold),
+                  .headline4
+                  .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
             ),
             ProductCardListView('null'),
             Center(
