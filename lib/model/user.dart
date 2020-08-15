@@ -19,3 +19,23 @@ class CategoryData {
 
   CategoryData({this.uid, this.category1, this.category2, this.category3});
 }
+
+class PostData {
+  final String uid;
+  final String username;
+  final String imagePath;
+  final String category;
+  final String title;
+  final String description;
+  final int price;
+
+  PostData({
+    this.uid,
+    this.username,
+    this.imagePath,
+    this.category,
+    this.title,
+    this.description,
+    this.price,
+});
+}

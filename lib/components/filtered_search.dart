@@ -76,3 +76,25 @@ class _SearchScreenPostsState extends State<SearchScreenPosts> {
   }
 }
 
+class ProfileScreenPosts extends StatefulWidget {
+  ProfileScreenPosts(this.profileFilter);
+  String profileFilter;
+  @override
+  _ProfileScreenPostsState createState() => _ProfileScreenPostsState();
+}
+
+class _ProfileScreenPostsState extends State<ProfileScreenPosts> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: FutureBuilder(
+        future: getPosts(),
+        builder: (_, snapshot){
+
+        }
+      ),
+    );
+  }
+}
+
+

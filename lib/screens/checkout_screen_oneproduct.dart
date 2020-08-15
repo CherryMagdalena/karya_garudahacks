@@ -1,26 +1,36 @@
 // Checkout from purchase confirm of one product
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/screens/order_success_screen.dart';
+import 'package:karya_garudahacks/model/product.dart';
 
 class CheckoutOneProduct extends StatelessWidget {
+  final int price;
+  final Product products;
+  final int qty;
+  CheckoutOneProduct(this.products, this.price, this.qty);
   @override
   Widget build(BuildContext context) {
     //personal details inc name, phone number, address
     Widget personaldetails = Container(
-
+      padding:
+      const EdgeInsets.only(left: 20.0, top: 20.0),
+ alignment: Alignment.centerLeft,
       child:Column(
+
         crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-          Text('Personal Details',style: TextStyle( color: Colors.blueGrey, fontSize: 20.0,fontWeight: FontWeight.bold), ),
-          Text('Name: ', style: TextStyle( color: Colors.blueGrey, fontSize: 20.0),),
+          Text('Personal Details',style: TextStyle( color: color1, fontSize: 20.0,fontWeight: FontWeight.bold), ),
+          Text(''),
+          Text('Name: ', style: TextStyle( color: color1, fontSize: 20.0),),
           Text('Mario Luigi'),
-          Text('Address: ', style: TextStyle( color: Colors.blueGrey, fontSize: 20.0),),
+          Text('Address: ', style: TextStyle( color: color1, fontSize: 20.0),),
           Text('Mushroom Kingdom, Brooklyn, New York'),
-          Text('Contact Number: ', style: TextStyle( color: Colors.blueGrey, fontSize: 20.0),),
+          Text('Contact Number: ', style: TextStyle( color: color1, fontSize: 20.0),),
           Text('+62 111 1111 1111'),
-          Text('Payment Method: ', style: TextStyle( color: Colors.blueGrey, fontSize: 20.0),),
+          Text('Payment Method: ', style: TextStyle( color: color1, fontSize: 20.0),),
           Text('BCA Transfer'),
         ],
       ),
@@ -28,11 +38,14 @@ class CheckoutOneProduct extends StatelessWidget {
 
     //delivery
     Widget deliveryoptions = Container(
-      alignment: Alignment.topLeft,
+      padding:
+      const EdgeInsets.only(left: 20.0, top: 20.0),
+      alignment: Alignment.centerLeft,
       child:Column(
-
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Delivery Method', style: TextStyle( color: Colors.blueGrey, fontSize: 20.0),),
+          Text('Delivery Method', style: TextStyle( color: color1, fontSize: 20.0,fontWeight: FontWeight.bold),),
+          Text(''),
           Text('JNE'),
         ],
       ),
@@ -58,29 +71,18 @@ class CheckoutOneProduct extends StatelessWidget {
           children: [
            ListTile(
               leading: Text('INSERT IMAGE'),
-              title: Text('INSERT PRODUCT TITLE'),
-              subtitle: Column(
-                children: <Widget>[
-                  Row(
-                    children:<Widget>[
-                      Expanded(child: Text('Quantity: ')),
+              title: Text('INSERT PRODUCT TITLE',
+               // products.title,
 
-                      Expanded(child: Text('qty')),
-                    ],
-                  ),
-                ],
               ),
-
               trailing: new Wrap(
                 direction: Axis.vertical,
-
-
                 children: <Widget>[
                   Container(padding: EdgeInsets.only(top: 15.0),
-                    child:Text('Rp. '),
+                    child:Text('Quantity: '),
                   ),
                   Container(padding: EdgeInsets.only(top: 15.0),
-                    child: Text( 'PRICE'
+                    child: Text( qty.toString(),
                     ),
                   ),
                 ],
@@ -102,6 +104,7 @@ class CheckoutOneProduct extends StatelessWidget {
               child: ListTile(
                 title:Text('Total: '),
                 subtitle: Text('Rp. ' + 'PRICE',
+                    //price.toString(),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),

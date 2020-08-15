@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
+import 'package:karya_garudahacks/screens/home_screen.dart';
 import 'package:karya_garudahacks/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:karya_garudahacks/model/user.dart';
@@ -18,6 +19,7 @@ class _CategorySelectionPageState extends State<CategorySelectionPage> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
+
     return StreamBuilder<CategoryData>(
     stream: DatabaseService(uid: user.uid).categoryData,
     builder: (context, snapshot) {
@@ -31,7 +33,7 @@ class _CategorySelectionPageState extends State<CategorySelectionPage> {
             "Congratulations, you're in!",
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 30.0,
+              fontSize: 25.0,
               color: color2,
             ),
           ),
@@ -41,17 +43,18 @@ class _CategorySelectionPageState extends State<CategorySelectionPage> {
           margin: EdgeInsets.all(5.0),
           child: Column(
             children: <Widget>[
+              Container(height: 20,),//spacing
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(
                   'Choose 3 of your preferred categories.',
                   style: TextStyle(
                     color: color2,
-                    fontSize: 25.0,
+                    fontSize: 14.0,
                   ),
                 ),
               ),
-              Container(height: 15,),//spacing
+              Container(height: 20,),//spacing
               GridView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -105,7 +108,7 @@ class _CategorySelectionPageState extends State<CategorySelectionPage> {
                     )
                 ),
                 onPressed: () async{///go to home screen
-                  //navigator.push(context, MaterialPageRoute(builder: (context) => HOMESCREENLOC));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
                   //update database with category data!
                   await DatabaseService(uid: user.uid).updateCategoryData(
                     chosenCategory[0] ?? categoryData.category1,
