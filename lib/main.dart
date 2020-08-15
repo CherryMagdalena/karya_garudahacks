@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/screens/login_signup_screen.dart';
 import 'package:karya_garudahacks/screens/home_screen.dart';
+import 'package:karya_garudahacks/services/auth.dart';
+import 'package:karya_garudahacks/wrapper.dart';
+import 'package:provider/provider.dart';
+
+import 'model/user.dart';
 
 void main() {
-  runApp(HomeScreen());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +20,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LogIn(),
+      home: StreamProvider<User>.value(
+        value: AuthService().user,
+        child: MaterialApp(
+          home: Wrapper(),
+        ),
+      )
     );
   }
 }

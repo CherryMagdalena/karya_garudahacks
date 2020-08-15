@@ -74,12 +74,14 @@ class _SignUpDataState extends State<SignUpData> {
                       ),
                     ),
                     onPressed: () async {
-                      //navigate to next page
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> CategorySelectionPage()));
+                      if (_formKey.currentState.validate()) {
+                        //navigate to next page
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> CategorySelectionPage()));
+                        await DatabaseService(uid: user.uid).updateUserData(
+                            name ?? userData.name,
+                            username ?? userData.username);
+                      }
                       //update data to database
-                      await DatabaseService(uid: user.uid).updateUserData(
-                          name ?? userData.name,
-                          username ?? userData.username);
                     },
                   );
                 },
