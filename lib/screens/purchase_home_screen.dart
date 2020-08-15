@@ -29,7 +29,7 @@ class _PurchaseHomeScreenState extends State<PurchaseHomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Popular This Week',
+              'Newest ',
               style: Theme.of(context)
                   .textTheme
                   .headline5
