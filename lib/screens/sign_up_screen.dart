@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:karya_garudahacks/screens/sign_up_screen_2.dart';
 import 'package:karya_garudahacks/services/auth.dart';
 import 'login_signup_screen.dart';
+import 'package:karya_garudahacks/components/loading.dart';
 
 const textInputDecoration = InputDecoration(
   fillColor: Colors.white,
@@ -31,9 +32,11 @@ class _SignUpState extends State<SignUp> {
   String password = '';
   String error = '';
 
+  bool loading = false;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       backgroundColor: color3,
       appBar: AppBar(
         backgroundColor: color2,
@@ -73,9 +76,13 @@ class _SignUpState extends State<SignUp> {
                 ),
                 onPressed: () async {
                   if(_formKey.currentState.validate()){
+                    setState(() {
+                      loading = true;
+                    });
                     dynamic result = await _auth.registerWithEmailAndPass(email ,password);
                     if(result == null){
                       setState(() {
+                          loading = false;
                         error = 'Please insert the correct type of data required';
                       });
                     } else {
@@ -93,7 +100,7 @@ class _SignUpState extends State<SignUp> {
                   style: TextStyle(color: Colors.black45, fontSize: 15),
                   children: [
                     TextSpan(
-                        text: 'Alreasy have an account?',
+                        text: 'Already have an account?',
                         style: TextStyle(
                             color: color2,
                             fontWeight: FontWeight.bold
