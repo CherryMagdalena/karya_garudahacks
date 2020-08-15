@@ -53,6 +53,8 @@ class _SearchScreenPostsState extends State<SearchScreenPosts> {
                 return RaisedButton(
                   child: Image.network(
                     productList[index].image,
+                    width: 500,
+                    height: 500,
                     fit: BoxFit.cover,
                   ),
                   onPressed: (){
@@ -90,7 +92,39 @@ class _ProfileScreenPostsState extends State<ProfileScreenPosts> {
       child: FutureBuilder(
         future: getPosts(),
         builder: (_, snapshot){
-
+          if(snapshot.connectionState == ConnectionState.waiting){
+            return Text(''); //change with loading screen later? maybe
+          }
+          else{}
+          List<Product> productList = productListing(snapshot.data);
+          return Expanded(
+            child: GridView.count(
+              mainAxisSpacing: 5.0,
+              crossAxisCount: 3,
+              crossAxisSpacing: 5.0,
+              children: List.generate(productList.length, (index){
+                return RaisedButton(
+                    child: Image.network(
+                      productList[index].image,
+                      width: 500,
+                      height: 500,
+                      fit: BoxFit.cover,
+                    ),
+                    onPressed: (){
+                      /*Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ClickedPost(
+                              productList[index]
+                            )
+                      ),
+                    );*/
+                    }
+                ),
+              })
+            ),
+          ),
         }
       ),
     );

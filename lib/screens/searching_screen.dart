@@ -79,7 +79,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   decoration: roundButton(),
                 ),
                 Container(
-                  width: 120,
+                  width: 118,
                   child: Text(
                     'Sale only',
                     textAlign: TextAlign.left,
