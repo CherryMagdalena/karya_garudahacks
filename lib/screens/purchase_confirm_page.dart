@@ -36,7 +36,7 @@ class _PurchaseConfirmationState extends State<PurchaseConfirmation> {
 
   @override
   Widget build(BuildContext context) {
-    int price = 5; //products.price*_counter;
+    int price = products.price*_counter;
     int qty = _counter;
     return Scaffold(
       backgroundColor: color4,
@@ -54,9 +54,10 @@ class _PurchaseConfirmationState extends State<PurchaseConfirmation> {
       body: Card(
         color: color4,
         child: ListTile(
-          leading: Text('INSERT IMAGE'),
-          title: Text('INSERT PRODUCT TITLE',
-            //products.title, style: TextStyle(color: color1),
+          leading: Image.network(products.image, width: 100,
+            height: 100, fit: BoxFit.cover,),
+          title: Text(
+            products.title, style: TextStyle(color: color1),
           ),
           subtitle: Column(
             children: <Widget>[
@@ -64,8 +65,8 @@ class _PurchaseConfirmationState extends State<PurchaseConfirmation> {
                 children:<Widget>[
                   Expanded(child: Text('Price(1): ', style: TextStyle(color: color2),)),
 
-                  Expanded(child: Text('Rp. ' + 'PRICE'
-                     // products.price.toString(),style: TextStyle(color: color2)
+                  Expanded(child: Text('Rp. ' +
+                      products.price.toString(),style: TextStyle(color: color2)
                   )),
                 ],
               ),
@@ -101,8 +102,8 @@ class _PurchaseConfirmationState extends State<PurchaseConfirmation> {
             Expanded(
               child: ListTile(
                 title: Text('Total: '),
-                subtitle: Text('Rp. ' + 'PRICE',
-                    //price.toString(),
+                subtitle: Text('Rp. ' +
+                    price.toString(),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),

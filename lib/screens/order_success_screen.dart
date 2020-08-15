@@ -9,32 +9,47 @@ class OrderSuccess extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: color4,
-      appBar:  AppBar(
-          iconTheme: IconThemeData(color: color1),
-          backgroundColor: color3,
-          elevation: 0,
-          automaticallyImplyLeading: true,
-      ),
-      body: MaterialButton(
-        onPressed: (){
-          Navigator.push(context,
-            MaterialPageRoute(
-                builder: (context) => HomeScreen(),
-            ),
-          );
-        },
-        child: Container(
-          alignment: Alignment.center,
-          padding:
-          const EdgeInsets.only(left: 60.0),
-          child: Text('SUCCESSFULLY PLACED ORDER',
-            style: TextStyle(
-              color: color1,
-              fontSize: 40,
-              fontWeight: FontWeight.bold,
+      body: Container(
 
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            MaterialButton(
+              onPressed: (){
+                Navigator.push(context,
+                  MaterialPageRoute(
+                    builder: (context) => HomeScreen(),
+                  ),
+                );
+              },
+              child: Container(
+                alignment: Alignment.center,
+                padding:
+                const EdgeInsets.all(45.0),
+                child: Text('SUCCESSFULLY PLACED ORDER',
+                  style: TextStyle(
+                    color: color1,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+
+                  ),
+                ),
+              ),
             ),
-          ),
+            MaterialButton(
+              onPressed: (){
+                Navigator.push(context,
+                  MaterialPageRoute(
+                    builder: (context) => HomeScreen(),
+                  ),
+                );
+              },
+              child: Icon(Icons.check_circle_outline,
+              size: 150.0,
+                color: color1,
+              ),
+            )
+          ]
         ),
       ),
 

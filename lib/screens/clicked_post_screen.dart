@@ -85,10 +85,10 @@ class ClickedPost extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           MaterialButton(
+
+
             color:color2,
             onPressed: (){
-              ShoppingCart.tocart.add(products);
-              ShoppingCart.qty.add(1);
               Navigator.push(context,
               MaterialPageRoute(
                 builder: (context) => PurchaseConfirmation(this.products)
@@ -100,6 +100,8 @@ class ClickedPost extends StatelessWidget {
             ),
           ),
           MaterialButton(
+
+
             color:color2,
             onPressed: (){
               ShoppingCart.tocart.add(products);

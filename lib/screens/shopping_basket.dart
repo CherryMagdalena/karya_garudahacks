@@ -3,6 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/shopping_cart.dart';
 import 'package:karya_garudahacks/model/colors.dart';
+import 'package:karya_garudahacks/model/product.dart';
+import 'package:karya_garudahacks/screens/checkout_multiple.dart';
+
 
 class ShoppingBasket extends StatefulWidget {
   @override
@@ -16,6 +19,8 @@ class _ShoppingBasketState extends State<ShoppingBasket> {
 
   @override
   Widget build(BuildContext context) {
+
+    Product products;
     return Scaffold(
       backgroundColor: color4,
       appBar: AppBar(
@@ -30,20 +35,18 @@ class _ShoppingBasketState extends State<ShoppingBasket> {
             ),)
       ),
       body: ListView.builder(
-        itemCount: 4,//ShoppingCart.tocart.length,
+        itemCount: ShoppingCart.tocart.length,
         itemBuilder: (context, index) {
 
           return
             Card(
               child: ListTile(
-                leading: Text('INSERT IMAGE'), /*Image.asset(
+                leading: Image.network(
                   ShoppingCart.tocart[index].image,
                   width: 100.0,
                   height: 100.0,
-                ), */
-                title: Text( 'INSERT TITLE'
-                   // ShoppingCart.tocart[index].title
                 ),
+                title: Text(ShoppingCart.tocart[index].title),
                 subtitle: Column(
                   children: <Widget>[
                     Row(
@@ -52,9 +55,7 @@ class _ShoppingBasketState extends State<ShoppingBasket> {
                           child: Text('Price(1) :'),
                         ),
                         Expanded(
-                          child: Text( 'INSERT PRICE',
-                              //ShoppingCart.tocart[index].price.toString()
-                          ),
+                          child: Text(ShoppingCart.tocart[index].price.toString()),
                         ),
                       ],
                     ),
@@ -66,25 +67,40 @@ class _ShoppingBasketState extends State<ShoppingBasket> {
                     new IconButton(
                       icon: Icon(Icons.arrow_drop_up),
                       onPressed: (){
-                      /*  setState(() {
+                        setState(() {
                           ShoppingCart.qty[index] += 1;
-                        }); */
+                        });
                       },
                     ),
                     Container(
                       padding: EdgeInsets.only(top: 15.0),
-                      child: Text( 'INSERT INDEX'
-                       // ShoppingCart.qty[index].toString(),
+                      child: Text(
+                        ShoppingCart.qty[index].toString(),
                       ),
                     ),
                     new IconButton(
                       icon: Icon(Icons.arrow_drop_down),
                       onPressed: () {
-                      /*  setState(() {
-                          ShoppingCart.qty[index] -= 1;
-                        }); */
+                        setState(() {
+                          if (ShoppingCart.qty[index] == 1) {
+                            //ShoppingCart.qty[index];
+                          }
+                          else {
+                            ShoppingCart.qty[index] -= 1;
+                          }
+
+                        });
                       },
                     ),
+                    new IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: (){
+                        setState(() {
+                          ShoppingCart.tocart.remove(products);
+                        });
+                      },
+                    ),
+
                   ],
                 ),
               ),
@@ -111,8 +127,8 @@ class _ShoppingBasketState extends State<ShoppingBasket> {
             Expanded(
               child: ListTile(
                 title: Text('Total: '),
-                subtitle: Text('Rp. ' + 'PRICE',
-                  // ShoppingCart.countTotalPrice().toString()
+                subtitle: Text('Rp. ' +
+                    ShoppingCart.countTotalPrice().toString(),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
@@ -121,7 +137,7 @@ class _ShoppingBasketState extends State<ShoppingBasket> {
               onPressed: (){
                 Navigator.push(context,
                   MaterialPageRoute(
-                    //builder: (context) => Checkout
+                      builder: (context) => CheckoutCart()
                   ),
                 );
               },

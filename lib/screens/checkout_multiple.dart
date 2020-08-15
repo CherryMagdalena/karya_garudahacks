@@ -1,23 +1,17 @@
-// Checkout from purchase confirm of one product
+// Checkout for cart
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/screens/order_success_screen.dart';
-import 'package:karya_garudahacks/model/product.dart';
+import 'package:karya_garudahacks/model/shopping_cart.dart';
 
-class CheckoutOneProduct extends StatelessWidget {
-  final int price;
-  final Product products;
-  final int qty;
-  CheckoutOneProduct(this.products, this.price, this.qty);
+class CheckoutCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //personal details inc name, phone number, address
     Widget personaldetails = Container(
       padding:
       const EdgeInsets.only(left: 20.0, top: 20.0),
- alignment: Alignment.centerLeft,
+      alignment: Alignment.centerLeft,
       child:Column(
 
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,7 +33,7 @@ class CheckoutOneProduct extends StatelessWidget {
     //delivery
     Widget deliveryoptions = Container(
       padding:
-      const EdgeInsets.only(left: 20.0, top: 20.0),
+      const EdgeInsets.only(left: 20.0, bottom: 20.0, top: 10.0),
       alignment: Alignment.centerLeft,
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +44,6 @@ class CheckoutOneProduct extends StatelessWidget {
         ],
       ),
     );
-
 
     return Scaffold(
       backgroundColor: color4,
@@ -65,28 +58,66 @@ class CheckoutOneProduct extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),)
       ),
+
       body: Container(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-           ListTile(
-              leading: Image.network(products.image, width: 100,
-                height: 100, fit: BoxFit.cover,),
-              title: Text(
-               products.title,
-              ),
-              trailing: new Wrap(
-                direction: Axis.vertical,
-                children: <Widget>[
-                  Container(padding: EdgeInsets.only(top: 15.0),
-                    child:Text('Quantity: '),
-                  ),
-                  Container(padding: EdgeInsets.only(top: 15.0),
-                    child: Text(
-                      qty.toString(),
-                    ),
-                  ),
-                ],
+            Container(
+              child: Expanded(
+                child: ListView.builder(
+                  itemCount: ShoppingCart.tocart.length,
+                  itemBuilder: (context, index) {
+
+                    return
+                      Card(
+                        child: ListTile(
+                          leading: Image.network(
+                            ShoppingCart.tocart[index].image,
+                            width: 100.0,
+                            height: 100.0,
+                          ),
+                          title: Text(
+                             ShoppingCart.tocart[index].title
+                          ),
+                          subtitle: Column(
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Text('Price(1) :'),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      ShoppingCart.tocart[index].price.toString()
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          trailing: new Wrap(
+                            direction: Axis.vertical,
+                            children: <Widget>[
+                              Container(
+                                padding: EdgeInsets.only(top: 15.0),
+                                child: Text( 'Quantity: '
+
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(top: 15.0),
+                                child: Text(
+                                  ShoppingCart.qty[index].toString(),
+                                ),
+                              ),
+
+                            ],
+                          ),
+                        ),
+                      );
+
+                  },
+                ),
               ),
             ),
             personaldetails,
@@ -94,7 +125,6 @@ class CheckoutOneProduct extends StatelessWidget {
           ],
         ),
       ),
-
 
       bottomNavigationBar: Container(
         color: color3,
@@ -105,7 +135,7 @@ class CheckoutOneProduct extends StatelessWidget {
               child: ListTile(
                 title:Text('Total: '),
                 subtitle: Text('Rp. ' +
-                    price.toString(),
+                  ShoppingCart.countTotalPrice().toString(),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
@@ -125,6 +155,7 @@ class CheckoutOneProduct extends StatelessWidget {
           ],
         ),
       ),
+
     );
   }
 }

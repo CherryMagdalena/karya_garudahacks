@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/screens/login_signup_screen.dart';
-import 'package:karya_garudahacks/screens/home_screen.dart';
 import 'package:karya_garudahacks/services/auth.dart';
 import 'package:karya_garudahacks/wrapper.dart';
 import 'package:provider/provider.dart';
