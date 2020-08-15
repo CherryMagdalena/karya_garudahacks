@@ -175,22 +175,24 @@ class ClickedPost extends StatelessWidget {
       backgroundColor: color4,
       appBar: CustomAppBar(),
       bottomNavigationBar: CustomBottomAppBar(),
-      body: Column(
-        children: [
-          profile,
-          Image.network(
-            products.image,
-            width: 400,
-            height: 200,
-            fit: BoxFit.cover,
-          ),
-          titleSection,
-          price,
-          buttons,
-          buynadd,
-          comment,
-          commentsect,
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            profile,
+            Image.network(
+              products.image,
+              width: 400,
+              height: 200,
+              fit: BoxFit.cover,
+            ),
+            titleSection,
+            price,
+            buttons,
+            buynadd,
+            comment,
+            commentsect,
+          ],
+        ),
       ),
 
     );

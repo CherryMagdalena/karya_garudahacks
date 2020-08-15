@@ -51,6 +51,7 @@ class _SearchScreenPostsState extends State<SearchScreenPosts> {
               crossAxisCount: 3,
               children: List.generate(productList.length, (index){
                 return RaisedButton(
+                  padding: EdgeInsets.all(0.0),
                   child: Image.network(
                     productList[index].image,
                     width: 500,
@@ -58,7 +59,7 @@ class _SearchScreenPostsState extends State<SearchScreenPosts> {
                     fit: BoxFit.cover,
                   ),
                   onPressed: (){
-                    /*Navigator.push(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
@@ -66,7 +67,7 @@ class _SearchScreenPostsState extends State<SearchScreenPosts> {
                               productList[index]
                             )
                       ),
-                    );*/
+                    );
                 }
                 );
               })
@@ -104,6 +105,7 @@ class _ProfileScreenPostsState extends State<ProfileScreenPosts> {
               crossAxisSpacing: 5.0,
               children: List.generate(productList.length, (index){
                 return RaisedButton(
+                    padding: EdgeInsets.all(0.0),
                     child: Image.network(
                       productList[index].image,
                       width: 500,
@@ -111,7 +113,7 @@ class _ProfileScreenPostsState extends State<ProfileScreenPosts> {
                       fit: BoxFit.cover,
                     ),
                     onPressed: (){
-                      /*Navigator.push(
+                      Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
@@ -119,7 +121,7 @@ class _ProfileScreenPostsState extends State<ProfileScreenPosts> {
                               productList[index]
                             )
                       ),
-                    );*/
+                    );
                     }
                 );
               })
