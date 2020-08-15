@@ -5,6 +5,7 @@ import 'package:karya_garudahacks/model/shopping_cart.dart';
 import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/model/product.dart';
 import 'package:karya_garudahacks/screens/checkout_multiple.dart';
+import 'package:karya_garudahacks/components/price_formatter.dart';
 
 
 class ShoppingBasket extends StatefulWidget {
@@ -15,6 +16,9 @@ class ShoppingBasket extends StatefulWidget {
 class _ShoppingBasketState extends State<ShoppingBasket> {
   clearCart(){
     ShoppingCart.tocart.clear();
+  }
+  clearQTY(){
+    ShoppingCart.qty.clear();
   }
 
   @override
@@ -48,17 +52,22 @@ class _ShoppingBasketState extends State<ShoppingBasket> {
                 ),
                 title: Text(ShoppingCart.tocart[index].title),
                 subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Text('Price(1) :'),
-                        ),
-                        Expanded(
-                          child: Text(ShoppingCart.tocart[index].price.toString()),
-                        ),
-                      ],
-                    ),
+
+
+
+                    Text('Price(1) :'),
+
+
+                          Text(
+                              priceFormatter(
+                                  ShoppingCart.tocart[index].price),
+                              )
+
+
+
+
                   ],
                 ),
                 trailing: new Wrap(
@@ -114,21 +123,25 @@ class _ShoppingBasketState extends State<ShoppingBasket> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Expanded(
-              child: MaterialButton(
+
+              MaterialButton(
                 onPressed:(){
                   setState(() {
                     clearCart();
+                    clearQTY();
                   });
                 },
                 child: Text('Clear Cart'),
               ),
-            ),
+
             Expanded(
               child: ListTile(
                 title: Text('Total: '),
-                subtitle: Text('Rp. ' +
-                    ShoppingCart.countTotalPrice().toString(),
+                subtitle: Text(
+                  priceFormatter(
+    ShoppingCart.countTotalPrice()
+    ),
+
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),

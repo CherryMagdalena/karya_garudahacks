@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/screens/order_success_screen.dart';
 import 'package:karya_garudahacks/model/product.dart';
+import 'package:karya_garudahacks/components/price_formatter.dart';
 
 class CheckoutOneProduct extends StatelessWidget {
   final int price;
@@ -104,8 +105,11 @@ class CheckoutOneProduct extends StatelessWidget {
             Expanded(
               child: ListTile(
                 title:Text('Total: '),
-                subtitle: Text('Rp. ' +
-                    price.toString(),
+                subtitle: Text(
+                  priceFormatter(
+                    price,
+                  ),
+
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),

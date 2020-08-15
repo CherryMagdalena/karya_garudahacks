@@ -6,6 +6,9 @@ import 'package:karya_garudahacks/screens/order_success_screen.dart';
 import 'package:karya_garudahacks/model/shopping_cart.dart';
 
 class CheckoutCart extends StatelessWidget {
+  clearCart(){
+    ShoppingCart.tocart.clear();
+  }
   @override
   Widget build(BuildContext context) {
     Widget personaldetails = Container(
@@ -142,6 +145,7 @@ class CheckoutCart extends StatelessWidget {
             ),
             MaterialButton(
               onPressed: (){
+                clearCart();
                 Navigator.push(context,
                   MaterialPageRoute(
                       builder: (context) => OrderSuccess()

@@ -8,6 +8,7 @@ import 'package:karya_garudahacks/components/bottom_app_bar.dart';
 import 'package:karya_garudahacks/model/shopping_cart.dart';
 import 'package:karya_garudahacks/screens/shopping_basket.dart';
 import 'package:karya_garudahacks/model/product.dart';
+import 'package:karya_garudahacks/components/price_formatter.dart';
 
 Column _buildButtonColumn(IconData icon) {
   return Column(
@@ -62,8 +63,10 @@ class ClickedPost extends StatelessWidget {
     Widget price = Container(
       padding: EdgeInsets.only(left: 20.0),
       alignment: Alignment.centerLeft,
-      child: Text('Rp.' +
-        products.price.toString()
+      child: Text(priceFormatter(
+          products.price
+      )
+
       ),
     );
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/screens/checkout_screen_oneproduct.dart';
 import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/model/product.dart';
+import 'package:karya_garudahacks/components/price_formatter.dart';
 
 class PurchaseConfirmation extends StatefulWidget {
   Product products;
@@ -65,8 +66,11 @@ class _PurchaseConfirmationState extends State<PurchaseConfirmation> {
                 children:<Widget>[
                   Expanded(child: Text('Price(1): ', style: TextStyle(color: color2),)),
 
-                  Expanded(child: Text('Rp. ' +
-                      products.price.toString(),style: TextStyle(color: color2)
+                  Expanded(child: Text(
+                    priceFormatter(
+                        products.price
+                    ),
+                      style: TextStyle(color: color2),
                   )),
                 ],
               ),
@@ -102,8 +106,11 @@ class _PurchaseConfirmationState extends State<PurchaseConfirmation> {
             Expanded(
               child: ListTile(
                 title: Text('Total: '),
-                subtitle: Text('Rp. ' +
-                    price.toString(),
+                subtitle: Text(
+                  priceFormatter(
+                    price,
+                  ),
+
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),

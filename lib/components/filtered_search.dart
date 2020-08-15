@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:karya_garudahacks/model/product.dart';
 import 'package:karya_garudahacks/screens/clicked_post_screen.dart';
 import 'package:karya_garudahacks/model/user.dart';
+import 'package:karya_garudahacks/components/price_formatter.dart';
 
 var firestore = Firestore.instance;
 Future getPosts() async{
@@ -234,8 +235,11 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
                                   decoration: BoxDecoration(
                                     color: Colors.black45,
                                   ),
-                                  child: Text( 'Rp.' +
-                                      productList[homeList[index]].price.toString(),
+                                  child: Text(
+                                    priceFormatter(
+                        productList[homeList[index]].price,
+                      ),
+
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -263,7 +267,7 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
                             //button
                             Container(
                               padding:
-                              const EdgeInsets.only(left: 20.0, top: 20.0),
+                              const EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
