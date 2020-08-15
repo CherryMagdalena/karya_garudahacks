@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
         appBar: CustomAppBar(),
         bottomNavigationBar: CustomBottomAppBar(),
         floatingActionButton: FloatingButton(),
-        body: CategoryFilter(),
+        body: CategoryFilter(), //if you want to see your home screen layout code, head over to filtered_search.dart and CTRL+F for "home screen layout"
       ),
     );
   }
