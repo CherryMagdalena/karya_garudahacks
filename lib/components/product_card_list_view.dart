@@ -3,9 +3,9 @@ import 'package:karya_garudahacks/model/product.dart';
 import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/screens/clicked_post_screen.dart';
 import 'package:karya_garudahacks/components/price_formatter.dart';
-
+import 'package:karya_garudahacks/components/filtered_search.dart';
 //Sample
-List productList = [
+/*List productList = [
   Product(
       username: 'personA',
       category: 'sculpture',
@@ -30,9 +30,11 @@ List productList = [
       title: 'Wayang',
       description: 'desc',
       price: 100000)
-];
+];*/
 
 class ProductCardListView extends StatefulWidget {
+  ProductCardListView(this.category);
+  String category;
   @override
   _ProductCardListViewState createState() => _ProductCardListViewState();
 }
@@ -41,25 +43,54 @@ class _ProductCardListViewState extends State<ProductCardListView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(15.0),
-      height: 250.0,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.only(right: 5.0),
-        itemCount: productList.length,
-        itemBuilder: (context, index) {
-          Product product = productList[index];
+      child: FutureBuilder(
+          future: getPosts(),
+          builder: (_, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Text(''); //change with loading screen later? maybe
+            }
+            else {}
+            List<Product> productList = productListing(snapshot.data);
+            List productCardList = [];
 
-          return ProductCard(
-            product,
-          );
-        },
-        separatorBuilder: (context, index) {
-          return SizedBox(
-            width: 15.0,
-          );
-        },
-      ),
+            bool finishedForLoop = false;
+            for(int i=0; i < productList.length; i++){
+              if(productList[i].category == widget.category){
+                productCardList.add(i);
+              }
+              if(i == productList.length-1){
+                finishedForLoop = true;
+              }
+            }
+
+            if(snapshot.connectionState != ConnectionState.waiting && finishedForLoop==false){
+              return Text('');
+            }
+
+
+            return Container(
+              margin: EdgeInsets.all(15.0),
+              height: 250.0,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                padding: EdgeInsets.only(right: 5.0),
+                itemCount: productList.length,
+                itemBuilder: (context, index) {
+                  Product product = productList[productCardList[index]];
+
+                  return ProductCard(
+                    product,
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox(
+                    width: 15.0,
+                  );
+                },
+              ),
+            );
+          }
+    ),
     );
   }
 }
