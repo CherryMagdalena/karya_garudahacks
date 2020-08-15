@@ -187,7 +187,7 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
           List homeList = [];
           if(snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-              child: Text(""),
+              child: Text("Loading..."),
             );
           }
 
@@ -196,10 +196,8 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
               homeList.add(i);
             }
           }
-          return Container(
-            child: Column(
-              children: [
-                Expanded(///home screen layout home screen layout home screen layout
+
+          return Expanded(///home screen layout home screen layout home screen layout
                   child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: homeList.length,
@@ -273,10 +271,7 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
                           ),
                         );
                       }),
-                ),
-              ],
-            ),
-          );
+                );
         }
       ),
     );
