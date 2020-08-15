@@ -94,6 +94,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Container(//post and store
             height: 35,
             child: Row(
+
               children: <Widget>[
                 Container(
                   child: Text(

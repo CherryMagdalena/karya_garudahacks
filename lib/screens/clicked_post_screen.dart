@@ -35,7 +35,7 @@ class ClickedPost extends StatelessWidget {
             size: 40,
           ),
           Text(
-            'INSERT USERNAME',
+            products.username,
            // products.username,
             textDirection: TextDirection.ltr,
             style: TextStyle(
@@ -50,8 +50,8 @@ class ClickedPost extends StatelessWidget {
     Widget titleSection = Container(
       padding: EdgeInsets.only(left:20.0, top: 20.0),
       alignment: Alignment.centerLeft,
-      child: Text( 'INSERT TITLE',
-        //products.title,
+      child: Text(
+        products.title,
         textDirection: TextDirection.ltr,
         style: TextStyle(
           fontSize: 18,
@@ -64,9 +64,7 @@ class ClickedPost extends StatelessWidget {
       padding: EdgeInsets.only(left: 20.0),
       alignment: Alignment.centerLeft,
       child: Text('Rp.' +
-          'INSERT PRICE'
-        //products.price.toString()
-
+        products.price.toString()
       ),
     );
 
@@ -181,7 +179,12 @@ class ClickedPost extends StatelessWidget {
       body: Column(
         children: [
           profile,
-          //INSERT IMAGE FROM DB
+          Image.network(
+            products.image,
+            width: 400,
+            height: 200,
+            fit: BoxFit.cover,
+          ),
           titleSection,
           price,
           buttons,
