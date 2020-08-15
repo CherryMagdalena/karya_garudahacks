@@ -35,7 +35,7 @@ class _PurchaseHomeScreenState extends State<PurchaseHomeScreen> {
                   .headline5
                   .copyWith(fontWeight: FontWeight.bold),
             ),
-            ProductCardListView(),
+            ProductCardListView('null'),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

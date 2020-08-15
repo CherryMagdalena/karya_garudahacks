@@ -55,7 +55,7 @@ class _ProductCardListViewState extends State<ProductCardListView> {
 
             bool finishedForLoop = false;
             for(int i=0; i < productList.length; i++){
-              if(productList[i].category == widget.category){
+              if(widget.category == 'null' || productList[i].category == widget.category){
                 productCardList.add(i);
               }
               if(i == productList.length-1){
