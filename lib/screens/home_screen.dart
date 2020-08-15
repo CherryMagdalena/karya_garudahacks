@@ -43,12 +43,16 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 MaterialButton(
                                   child:  Text('IMAGE INSERT'),
+
+                                  //ADD LGSG DB
+
                                   onPressed: () {
-                                    Navigator.push(context,
+                                 /*   Navigator.push(context,
                                     MaterialPageRoute(
                                       builder: (context) => ClickedPost()
+
                                     ),
-                                    );
+                                    ); */
                                   },
                                 ),
                                 Container(

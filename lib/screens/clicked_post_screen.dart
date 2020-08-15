@@ -5,6 +5,7 @@ import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/screens/purchase_confirm_page.dart';
 import 'package:karya_garudahacks/components/app_bar.dart';
 import 'package:karya_garudahacks/components/bottom_app_bar.dart';
+import 'package:karya_garudahacks/model/product.dart';
 
 Column _buildButtonColumn(IconData icon) {
   return Column(
@@ -34,6 +35,9 @@ Container _container(String label) {
 }
 
 class ClickedPost extends StatelessWidget {
+  final Product products;
+  ClickedPost(this.products);
+
   @override
   Widget build(BuildContext context) {
     Widget profile = Container(
@@ -45,7 +49,8 @@ class ClickedPost extends StatelessWidget {
             size: 40,
           ),
           Text(
-            'INSERT USERNAME',
+            //'INSERT USERNAME'
+            products.username,
             textDirection: TextDirection.ltr,
             style: TextStyle(
               fontSize: 32,
@@ -59,7 +64,8 @@ class ClickedPost extends StatelessWidget {
     Widget titleSection = Container(
       padding: EdgeInsets.only(left:20.0, top: 20.0),
       alignment: Alignment.centerLeft,
-      child: Text('INSERT TITLE',
+      child: Text( //'INSERT TITLE',
+        products.title,
         textDirection: TextDirection.ltr,
         style: TextStyle(
           fontSize: 18,
@@ -71,7 +77,11 @@ class ClickedPost extends StatelessWidget {
     Widget price = Container(
       padding: EdgeInsets.only(left: 20.0),
       alignment: Alignment.centerLeft,
-      child: Text('Rp.' + 'INSERT PRICE')
+      child: Text('Rp.' +
+         // 'INSERT PRICE'
+        products.price.toString()
+
+      ),
     );
 
     Widget buttons = Container(
@@ -80,6 +90,7 @@ class ClickedPost extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           _buildButtonColumn(Icons.star), //like button
+          SizedBox(width: 7.5,),
           _buildButtonColumn(Icons.share) //share button
         ],
       ),
@@ -95,7 +106,7 @@ class ClickedPost extends StatelessWidget {
             onPressed: (){
               Navigator.push(context,
               MaterialPageRoute(
-                builder: (context) => PurchaseConfirmation()
+                builder: (context) => PurchaseConfirmation(products)
               ),
               );
             },

@@ -3,8 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/screens/order_success_screen.dart';
+import 'package:karya_garudahacks/model/product.dart';
 
 class CheckoutOneProduct extends StatelessWidget {
+  final int price;
+  final Product products;
+  final int qty;
+  CheckoutOneProduct(this.products, this.price, this.qty);
   @override
   Widget build(BuildContext context) {
     //personal details inc name, phone number, address
@@ -58,29 +63,18 @@ class CheckoutOneProduct extends StatelessWidget {
           children: [
            ListTile(
               leading: Text('INSERT IMAGE'),
-              title: Text('INSERT PRODUCT TITLE'),
-              subtitle: Column(
-                children: <Widget>[
-                  Row(
-                    children:<Widget>[
-                      Expanded(child: Text('Quantity: ')),
+              title: Text(//'INSERT PRODUCT TITLE'
+                products.title,
 
-                      Expanded(child: Text('qty')),
-                    ],
-                  ),
-                ],
               ),
-
               trailing: new Wrap(
                 direction: Axis.vertical,
-
-
                 children: <Widget>[
                   Container(padding: EdgeInsets.only(top: 15.0),
-                    child:Text('Rp. '),
+                    child:Text('Quantity: '),
                   ),
                   Container(padding: EdgeInsets.only(top: 15.0),
-                    child: Text( 'PRICE'
+                    child: Text( qty.toString(),
                     ),
                   ),
                 ],
@@ -101,7 +95,7 @@ class CheckoutOneProduct extends StatelessWidget {
             Expanded(
               child: ListTile(
                 title:Text('Total: '),
-                subtitle: Text('Rp. ' + 'PRICE',
+                subtitle: Text('Rp. ' + price.toString(),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
