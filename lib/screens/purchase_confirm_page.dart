@@ -3,14 +3,19 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/screens/checkout_screen_oneproduct.dart';
 import 'package:karya_garudahacks/model/colors.dart';
+import 'package:karya_garudahacks/model/product.dart';
 
 class PurchaseConfirmation extends StatefulWidget {
+  Product products;
+  PurchaseConfirmation(this.products);
   @override
-  _PurchaseConfirmationState createState() => _PurchaseConfirmationState();
+  _PurchaseConfirmationState createState() => _PurchaseConfirmationState(this.products);
 }
 
 class _PurchaseConfirmationState extends State<PurchaseConfirmation> {
   int _counter = 1;
+  Product products;
+  _PurchaseConfirmationState(this.products);
 
   void _addCounter() {
     setState(() {
@@ -31,6 +36,8 @@ class _PurchaseConfirmationState extends State<PurchaseConfirmation> {
 
   @override
   Widget build(BuildContext context) {
+    int price = 5; //products.price*_counter;
+    int qty = _counter;
     return Scaffold(
       backgroundColor: color4,
       appBar: AppBar(
@@ -45,16 +52,21 @@ class _PurchaseConfirmationState extends State<PurchaseConfirmation> {
             ),)
       ),
       body: Card(
+        color: color4,
         child: ListTile(
           leading: Text('INSERT IMAGE'),
-          title: Text('INSERT PRODUCT TITLE'),
+          title: Text('INSERT PRODUCT TITLE',
+            //products.title, style: TextStyle(color: color1),
+          ),
           subtitle: Column(
             children: <Widget>[
               Row(
                 children:<Widget>[
-                  Expanded(child: Text('Price(1): ')),
+                  Expanded(child: Text('Price(1): ', style: TextStyle(color: color2),)),
 
-                  Expanded(child: Text('Rp. ' + 'PRICE')),
+                  Expanded(child: Text('Rp. ' + 'PRICE'
+                     // products.price.toString(),style: TextStyle(color: color2)
+                  )),
                 ],
               ),
             ],
@@ -63,15 +75,16 @@ class _PurchaseConfirmationState extends State<PurchaseConfirmation> {
           trailing: Wrap(
             direction: Axis.vertical,
             children: <Widget>[
-              IconButton(icon: Icon(Icons.arrow_drop_up),
+              IconButton(icon: Icon(Icons.arrow_drop_up, color: color1,),
               onPressed: _addCounter,
               ),
               Container(
                 padding: EdgeInsets.only(top: 15.0),
                 child: Text(_counter.toString(),
+                  style: TextStyle(color: color1),
                 ),
               ),
-              IconButton(icon: Icon(Icons.arrow_drop_down),
+              IconButton(icon: Icon(Icons.arrow_drop_down,color: color1, ),
               onPressed: _minusCounter,
               ),
 
@@ -89,6 +102,7 @@ class _PurchaseConfirmationState extends State<PurchaseConfirmation> {
               child: ListTile(
                 title: Text('Total: '),
                 subtitle: Text('Rp. ' + 'PRICE',
+                    //price.toString(),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
@@ -97,7 +111,7 @@ class _PurchaseConfirmationState extends State<PurchaseConfirmation> {
               onPressed: (){
                 Navigator.push(context,
                 MaterialPageRoute(
-                  builder: (context) => CheckoutOneProduct()
+                  builder: (context) => CheckoutOneProduct(products,price,qty)
                 ),
                 );
               },
