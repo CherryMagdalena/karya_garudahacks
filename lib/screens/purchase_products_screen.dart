@@ -17,8 +17,7 @@ class PurchaseProductScreen extends StatefulWidget {
 class _PurchaseProductScreenState extends State<PurchaseProductScreen> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: CustomAppBar(),
         bottomNavigationBar: CustomBottomAppBar(),
         backgroundColor: color4,
@@ -41,7 +40,6 @@ class _PurchaseProductScreenState extends State<PurchaseProductScreen> {
             return SizedBox(height: 15.0);
           },
         ),
-      ),
-    );
+      );
   }
 }

@@ -12,7 +12,10 @@ class FloatingButton extends StatelessWidget {
       ),
       backgroundColor: color2,
       //Navigate to upload screen
-      onPressed: () => UploadPage(),
+      onPressed: (){ Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context)=> UploadPage())
+      );}
     );
   }
 }
