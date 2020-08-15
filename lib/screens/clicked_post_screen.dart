@@ -5,6 +5,8 @@ import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/screens/purchase_confirm_page.dart';
 import 'package:karya_garudahacks/components/app_bar.dart';
 import 'package:karya_garudahacks/components/bottom_app_bar.dart';
+import 'package:karya_garudahacks/model/shopping_cart.dart';
+import 'package:karya_garudahacks/screens/shopping_basket.dart';
 import 'package:karya_garudahacks/model/product.dart';
 
 Column _buildButtonColumn(IconData icon) {
@@ -88,9 +90,11 @@ class ClickedPost extends StatelessWidget {
           MaterialButton(
             color:color2,
             onPressed: (){
+              ShoppingCart.tocart.add(products);
+              ShoppingCart.qty.add(1);
               Navigator.push(context,
               MaterialPageRoute(
-                builder: (context) => PurchaseConfirmation(products)
+                builder: (context) => PurchaseConfirmation(this.products)
               ),
               );
             },
@@ -98,7 +102,19 @@ class ClickedPost extends StatelessWidget {
               style: TextStyle( color: Colors.white, fontSize: 20.0),
             ),
           ),
-          Text('Add to Cart', style: TextStyle( color: Colors.white, fontSize: 20.0),
+          MaterialButton(
+            color:color2,
+            onPressed: (){
+              ShoppingCart.tocart.add(products);
+              ShoppingCart.qty.add(1);
+              Navigator.push(context,
+                MaterialPageRoute(
+                    builder: (context) => ShoppingBasket()
+                ),
+              );
+            },
+            child: Text('Add to Cart', style: TextStyle( color: Colors.white, fontSize: 20.0),
+            ),
           ),
         ],
       ),
