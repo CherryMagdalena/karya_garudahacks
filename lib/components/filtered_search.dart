@@ -121,10 +121,10 @@ class _ProfileScreenPostsState extends State<ProfileScreenPosts> {
                       ),
                     );*/
                     }
-                ),
+                );
               })
             ),
-          ),
+          );
         }
       ),
     );
