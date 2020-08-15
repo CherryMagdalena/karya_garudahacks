@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
+import 'package:karya_garudahacks/screens/home_screen.dart';
 import 'package:karya_garudahacks/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:karya_garudahacks/model/user.dart';
@@ -18,6 +19,7 @@ class _CategorySelectionPageState extends State<CategorySelectionPage> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
+
     return StreamBuilder<CategoryData>(
     stream: DatabaseService(uid: user.uid).categoryData,
     builder: (context, snapshot) {
@@ -106,7 +108,7 @@ class _CategorySelectionPageState extends State<CategorySelectionPage> {
                     )
                 ),
                 onPressed: () async{///go to home screen
-                  //navigator.push(context, MaterialPageRoute(builder: (context) => HOMESCREENLOC));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
                   //update database with category data!
                   await DatabaseService(uid: user.uid).updateCategoryData(
                     chosenCategory[0] ?? categoryData.category1,

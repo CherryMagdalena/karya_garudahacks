@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/components/app_bar.dart';
 import 'package:karya_garudahacks/components/bottom_app_bar.dart';
+import 'package:karya_garudahacks/services/auth.dart';
+
+import 'login_signup_screen.dart';
 
 class SettingScreen extends StatelessWidget {
+  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
 
@@ -41,9 +45,14 @@ class SettingScreen extends StatelessWidget {
           _container('Purchases'),
           _container('My Likes'),
           _container('Setting'),
-          _container('Log Out', onClicked: (){
+          _container('Log Out', onClicked: () async {
             //log out
-    }),
+            await _auth.signOut();
+            await Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context)=> LogIn())
+            );
+          }),
         ],
       );
     }

@@ -1,10 +1,11 @@
 // Home Screen
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/components/floating_button.dart';
-import 'package:karya_garudahacks/screens/clicked_post_screen.dart';
 import 'package:karya_garudahacks/components/app_bar.dart';
 import 'package:karya_garudahacks/components/bottom_app_bar.dart';
 import 'package:karya_garudahacks/model/colors.dart';
+import 'package:karya_garudahacks/model/product.dart';
+import 'package:karya_garudahacks/screens/clicked_post_screen.dart';
 
 Column _buildButtonColumn(IconData icon) {
   return Column(
@@ -17,6 +18,7 @@ Column _buildButtonColumn(IconData icon) {
 }
 
 class HomeScreen extends StatelessWidget {
+  Product products;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -47,12 +49,12 @@ class HomeScreen extends StatelessWidget {
                                   //ADD LGSG DB
 
                                   onPressed: () {
-                                 /*   Navigator.push(context,
+                                   Navigator.push(context,
                                     MaterialPageRoute(
-                                      builder: (context) => ClickedPost()
+                                      builder: (context) => ClickedPost(products)
 
                                     ),
-                                    ); */
+                                    );
                                   },
                                 ),
                                 Container(

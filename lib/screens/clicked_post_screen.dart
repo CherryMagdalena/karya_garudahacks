@@ -5,6 +5,8 @@ import 'package:karya_garudahacks/model/colors.dart';
 import 'package:karya_garudahacks/screens/purchase_confirm_page.dart';
 import 'package:karya_garudahacks/components/app_bar.dart';
 import 'package:karya_garudahacks/components/bottom_app_bar.dart';
+import 'package:karya_garudahacks/model/shopping_cart.dart';
+import 'package:karya_garudahacks/screens/shopping_basket.dart';
 import 'package:karya_garudahacks/model/product.dart';
 
 Column _buildButtonColumn(IconData icon) {
@@ -17,22 +19,6 @@ Column _buildButtonColumn(IconData icon) {
   );
 }
 
-Container _container(String label) {
-  return Container(
-    padding: EdgeInsets.all(5.0),
-    decoration: BoxDecoration(
-      border: Border.all(width: 2),
-    ),
-    child: Text(
-      label,
-      textDirection: TextDirection.ltr,
-      style: TextStyle(
-        fontSize: 18,
-        color: Colors.black87,
-      ),
-    ),
-  );
-}
 
 class ClickedPost extends StatelessWidget {
   final Product products;
@@ -49,8 +35,8 @@ class ClickedPost extends StatelessWidget {
             size: 40,
           ),
           Text(
-            //'INSERT USERNAME'
-            products.username,
+            'INSERT USERNAME',
+           // products.username,
             textDirection: TextDirection.ltr,
             style: TextStyle(
               fontSize: 32,
@@ -64,8 +50,8 @@ class ClickedPost extends StatelessWidget {
     Widget titleSection = Container(
       padding: EdgeInsets.only(left:20.0, top: 20.0),
       alignment: Alignment.centerLeft,
-      child: Text( //'INSERT TITLE',
-        products.title,
+      child: Text( 'INSERT TITLE',
+        //products.title,
         textDirection: TextDirection.ltr,
         style: TextStyle(
           fontSize: 18,
@@ -78,8 +64,8 @@ class ClickedPost extends StatelessWidget {
       padding: EdgeInsets.only(left: 20.0),
       alignment: Alignment.centerLeft,
       child: Text('Rp.' +
-         // 'INSERT PRICE'
-        products.price.toString()
+          'INSERT PRICE'
+        //products.price.toString()
 
       ),
     );
@@ -104,9 +90,11 @@ class ClickedPost extends StatelessWidget {
           MaterialButton(
             color:color2,
             onPressed: (){
+              ShoppingCart.tocart.add(products);
+              ShoppingCart.qty.add(1);
               Navigator.push(context,
               MaterialPageRoute(
-                builder: (context) => PurchaseConfirmation(products)
+                builder: (context) => PurchaseConfirmation(this.products)
               ),
               );
             },
@@ -114,7 +102,19 @@ class ClickedPost extends StatelessWidget {
               style: TextStyle( color: Colors.white, fontSize: 20.0),
             ),
           ),
-          Text('Add to Cart', style: TextStyle( color: Colors.white, fontSize: 20.0),
+          MaterialButton(
+            color:color2,
+            onPressed: (){
+              ShoppingCart.tocart.add(products);
+              ShoppingCart.qty.add(1);
+              Navigator.push(context,
+                MaterialPageRoute(
+                    builder: (context) => ShoppingBasket()
+                ),
+              );
+            },
+            child: Text('Add to Cart', style: TextStyle( color: Colors.white, fontSize: 20.0),
+            ),
           ),
         ],
       ),
