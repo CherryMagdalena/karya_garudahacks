@@ -3,6 +3,7 @@ import 'package:karya_garudahacks/components/app_bar.dart';
 import 'package:karya_garudahacks/components/bottom_app_bar.dart';
 import 'package:karya_garudahacks/components/product_card_list_view.dart';
 import 'package:karya_garudahacks/model/colors.dart';
+import 'package:karya_garudahacks/screens/purchase_commissions_screen.dart';
 import 'package:karya_garudahacks/screens/purchase_products_screen.dart';
 
 void main() {
@@ -57,7 +58,11 @@ class _PurchaseHomeScreenState extends State<PurchaseHomeScreen> {
                   CategoryButton(
                     text: 'Commissions',
                     onClicked: () {
-                      //To Commission Page
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  PurchaseCommissionsScreen()));
                     },
                   )
                 ],
