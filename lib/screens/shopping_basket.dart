@@ -23,7 +23,6 @@ class _ShoppingBasketState extends State<ShoppingBasket> {
 
   @override
   Widget build(BuildContext context) {
-    Product products;
     return Scaffold(
       backgroundColor: color4,
       appBar: AppBar(
