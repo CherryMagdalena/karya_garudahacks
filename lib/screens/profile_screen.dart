@@ -5,6 +5,7 @@ import 'package:karya_garudahacks/components/bottom_app_bar.dart';
 import 'package:karya_garudahacks/model/user.dart';
 import 'package:karya_garudahacks/services/database.dart';
 import 'package:provider/provider.dart';
+import 'package:karya_garudahacks/components/filtered_search.dart';
 
 
 
@@ -17,7 +18,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-
 
     ///add databaseService
     bool followPressed = false;
@@ -41,9 +41,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         ///find icon! upload default profpic to firebase
-                        /*image: DecorationImage(
-                      image:
-                    ),*/
+                        image: DecorationImage(
+                          image: NetworkImage('gs://karya-43846.appspot.com/Chrysanthemum.jpg'),
+                          fit: BoxFit.fill,
+                        ),
                       ),
                     ),
                     Column(
@@ -103,6 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Container(//post and store
                   height: 35,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Container(
                         child: Text(
@@ -119,7 +121,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ],
                   ),
                 ),
-                ///input filteredSearch ProfileListLink here!
+                ProfileScreenPosts(userData.username),
               ],
             );
           },

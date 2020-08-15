@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:karya_garudahacks/model/product.dart';
 import 'package:karya_garudahacks/screens/clicked_post_screen.dart';
+import 'package:karya_garudahacks/model/user.dart';
 
 var firestore = Firestore.instance;
 Future getPosts() async{
@@ -23,6 +24,16 @@ productListing(var thing){
     ));
   }
   return productList;
+}
+
+Column _buildButtonColumn(IconData icon) {
+  return Column(
+    mainAxisSize: MainAxisSize.min,
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: [
+      Icon(icon),
+    ],
+  );
 }
 
 
@@ -96,10 +107,33 @@ class _ProfileScreenPostsState extends State<ProfileScreenPosts> {
           if(snapshot.connectionState == ConnectionState.waiting){
             return Text(''); //change with loading screen later? maybe
           }
-          else{}
+
           List<Product> productList = productListing(snapshot.data);
-          return Expanded(
-            child: GridView.count(
+          List profileList = [];
+
+          for(int i=0; i < productList.length; i++){
+            if(productList[i].username == widget.profileFilter){
+              profileList.add(i);
+            }
+          }
+
+          if(profileList.length == 0){
+            return Container(
+              child: Center(
+                child: Text(
+                  'There are no posts yet.',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 25,
+                  ),
+                ),
+              ),
+            );
+          }
+
+          else{
+            return Expanded(
+              child: GridView.count(
               mainAxisSpacing: 5.0,
               crossAxisCount: 3,
               crossAxisSpacing: 5.0,
@@ -126,7 +160,7 @@ class _ProfileScreenPostsState extends State<ProfileScreenPosts> {
                 );
               })
             ),
-          );
+          );}
         }
       ),
     );
@@ -134,3 +168,117 @@ class _ProfileScreenPostsState extends State<ProfileScreenPosts> {
 }
 
 
+
+class HomeScreenPosts extends StatefulWidget {
+  HomeScreenPosts(this.categoryFilter);
+  CategoryData categoryFilter;
+  @override
+  _HomeScreenPostsState createState() => _HomeScreenPostsState();
+}
+
+class _HomeScreenPostsState extends State<HomeScreenPosts> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: FutureBuilder(
+        future: getPosts(),
+        builder: (_, snapshot){
+          List<Product> productList = productListing(snapshot.data);
+          List profileList = [];
+          if(snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: Text(""),
+            );
+          }
+
+          for(int i=0; i < productList.length; i++){
+            if(productList[i].category == widget.categoryFilter.category1 || productList[i].category == widget.categoryFilter.category2 || productList[i].category == widget.categoryFilter.category3){
+              profileList.add(i);
+            }
+          }
+          return Container(
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: profileList.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          child: Column(
+                            children: <Widget>[
+                              //buildstack for image & price
+                              Stack(
+                                alignment: const Alignment(1.0, 0.9),
+                                children: [
+                                  MaterialButton(
+                                    child:  Image.network(
+                                      productList[profileList[index]].image,///imagePath
+                                      width: 400,
+                                      height: 200,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ClickedPost(productList[profileList[index]])
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.black45,
+                                    ),
+                                    child: Text( 'Rp.' +
+                                        productList[profileList[index]].price.toString(),
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              //textSection
+                              Container(
+                                padding:
+                                const EdgeInsets.only(left: 20.0, top: 20.0),
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  productList[profileList[index]].description,
+                                ),
+                              ),
+                              //tagS
+                              Container(
+                                padding: const EdgeInsets.only(left: 20.0),
+                                alignment: Alignment.centerLeft,
+                                child: Text('#tag1 #cool'),
+                              ),
+                              //button
+                              Container(
+                                padding:
+                                const EdgeInsets.only(left: 20.0, top: 20.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    _buildButtonColumn(Icons.star),
+                                    _buildButtonColumn(Icons.comment),
+                                    _buildButtonColumn(Icons.share),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
+                ),
+              ],
+            ),
+          );
+        }
+      ),
+    );
+  }
+}
