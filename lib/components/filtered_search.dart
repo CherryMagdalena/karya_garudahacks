@@ -184,7 +184,7 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
         future: getPosts(),
         builder: (_, snapshot){
           List<Product> productList = productListing(snapshot.data);
-          List profileList = [];
+          List homeList = [];
           if(snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: Text(""),
@@ -193,7 +193,7 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
 
           for(int i=0; i < productList.length; i++){
             if(productList[i].category == widget.categoryFilter.category1 || productList[i].category == widget.categoryFilter.category2 || productList[i].category == widget.categoryFilter.category3){
-              profileList.add(i);
+              homeList.add(i);
             }
           }
           return Container(
@@ -213,7 +213,7 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
                                 children: [
                                   MaterialButton(
                                     child:  Image.network(
-                                      productList[profileList[index]].image,///imagePath
+                                      productList[homeList[index]].image,///imagePath
                                       width: 400,
                                       height: 200,
                                       fit: BoxFit.cover,
@@ -221,7 +221,7 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
                                     onPressed: () {
                                       Navigator.push(context,
                                         MaterialPageRoute(
-                                            builder: (context) => ClickedPost(productList[profileList[index]])
+                                            builder: (context) => ClickedPost(productList[homeList[index]])
                                         ),
                                       );
                                     },
@@ -231,7 +231,7 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
                                       color: Colors.black45,
                                     ),
                                     child: Text( 'Rp.' +
-                                        productList[profileList[index]].price.toString(),
+                                        productList[homeList[index]].price.toString(),
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
@@ -247,7 +247,7 @@ class _HomeScreenPostsState extends State<HomeScreenPosts> {
                                 const EdgeInsets.only(left: 20.0, top: 20.0),
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  productList[profileList[index]].description,
+                                  productList[homeList[index]].description,
                                 ),
                               ),
                               //tagS
