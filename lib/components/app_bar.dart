@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:karya_garudahacks/model/colors.dart';
+import 'package:karya_garudahacks/screens/shopping_basket.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
@@ -19,7 +20,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             icon: Icon(Icons.shopping_basket),
             color: color1,
             onPressed: () {
-              //To shopping cart page
+              Navigator.push(context,
+                MaterialPageRoute(
+                    builder: (context) => ShoppingBasket()
+                ),
+              );
             },
           ),
         ),
