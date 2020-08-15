@@ -69,42 +69,42 @@ class _UploadPageState extends State<UploadPage> {
           });
     }
 
-    return SingleChildScrollView(
-      child: StreamBuilder(
-        stream: DatabaseService().postData,
-        // ignore: missing_return
-        builder: (context, snapshot){
-          PostData postData = snapshot.data;
-          return Scaffold(
-            backgroundColor: color4,
-            appBar: AppBar(
-              backgroundColor: color3,
-              title: Text('Upload your work'),
-              actions: [
-                FlatButton.icon(
-                  icon: Icon(
-                    Icons.file_upload,
-                    color: color1,
-                  ),
-                  label: Text(
-                    'Upload',
-                    style: TextStyle(color: color1),
-                  ),
-                  onPressed: () async {
-                    //upload image to firebase
-                    await DatabaseService().updatePostData(
-                        uid ?? uid,
-                        imagePath ?? postData.imagePath,
-                        category ?? postData.category,
-                        title ?? postData.title,
-                        description ?? postData.description,
-                        price ?? postData.price);
-                    Navigator.pop(context);
-                  },
-                )
-              ],
-            ),
-            body: Container(
+    return StreamBuilder(
+      stream: DatabaseService().postData,
+      // ignore: missing_return
+      builder: (context, snapshot){
+        PostData postData = snapshot.data;
+        return Scaffold(
+          backgroundColor: color4,
+          appBar: AppBar(
+            backgroundColor: color3,
+            title: Text('Upload your work'),
+            actions: [
+              FlatButton.icon(
+                icon: Icon(
+                  Icons.file_upload,
+                  color: color1,
+                ),
+                label: Text(
+                  'Upload',
+                  style: TextStyle(color: color1),
+                ),
+                onPressed: () async {
+                  //upload image to firebase
+                  await DatabaseService().updatePostData(
+                      uid ?? uid,
+                      imagePath ?? postData.imagePath,
+                      category ?? postData.category,
+                      title ?? postData.title,
+                      description ?? postData.description,
+                      price ?? postData.price);
+                  Navigator.pop(context);
+                },
+              )
+            ],
+          ),
+          body: SingleChildScrollView(
+            child: Container(
               padding: EdgeInsets.all(12.5),
               margin: EdgeInsets.all(7.5),
               child: Column(
@@ -179,9 +179,9 @@ class _UploadPageState extends State<UploadPage> {
                 ],
               ),
             ),
-          );
-        }
-      ),
+          ),
+        );
+      }
     );
   }
 }
