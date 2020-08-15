@@ -92,6 +92,7 @@ class _ShoppingBasketState extends State<ShoppingBasket> {
                         ShoppingCart.tocart.remove(ShoppingCart.tocart[index]);
                         ShoppingCart.qty.removeAt(index);
                         print(ShoppingCart.qty.length);
+                        clearQTY();
                       });
                     },
                   ),

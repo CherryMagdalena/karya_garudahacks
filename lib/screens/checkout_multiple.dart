@@ -10,6 +10,9 @@ class CheckoutCart extends StatelessWidget {
   clearCart(){
     ShoppingCart.tocart.clear();
   }
+  clearQTY() {
+    ShoppingCart.qty.clear();
+  }
   @override
   Widget build(BuildContext context) {
     Widget personaldetails = Container(
@@ -153,6 +156,7 @@ class CheckoutCart extends StatelessWidget {
             MaterialButton(
               onPressed: (){
                 clearCart();
+                clearQTY();
                 Navigator.push(context,
                   MaterialPageRoute(
                       builder: (context) => OrderSuccess()
