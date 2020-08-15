@@ -17,22 +17,6 @@ Column _buildButtonColumn(IconData icon) {
   );
 }
 
-Container _container(String label) {
-  return Container(
-    padding: EdgeInsets.all(5.0),
-    decoration: BoxDecoration(
-      border: Border.all(width: 2),
-    ),
-    child: Text(
-      label,
-      textDirection: TextDirection.ltr,
-      style: TextStyle(
-        fontSize: 18,
-        color: Colors.black87,
-      ),
-    ),
-  );
-}
 
 class ClickedPost extends StatelessWidget {
   final Product products;
@@ -49,8 +33,8 @@ class ClickedPost extends StatelessWidget {
             size: 40,
           ),
           Text(
-            //'INSERT USERNAME'
-            products.username,
+            'INSERT USERNAME',
+           // products.username,
             textDirection: TextDirection.ltr,
             style: TextStyle(
               fontSize: 32,
@@ -64,8 +48,8 @@ class ClickedPost extends StatelessWidget {
     Widget titleSection = Container(
       padding: EdgeInsets.only(left:20.0, top: 20.0),
       alignment: Alignment.centerLeft,
-      child: Text( //'INSERT TITLE',
-        products.title,
+      child: Text( 'INSERT TITLE',
+        //products.title,
         textDirection: TextDirection.ltr,
         style: TextStyle(
           fontSize: 18,
@@ -78,8 +62,8 @@ class ClickedPost extends StatelessWidget {
       padding: EdgeInsets.only(left: 20.0),
       alignment: Alignment.centerLeft,
       child: Text('Rp.' +
-         // 'INSERT PRICE'
-        products.price.toString()
+          'INSERT PRICE'
+        //products.price.toString()
 
       ),
     );
