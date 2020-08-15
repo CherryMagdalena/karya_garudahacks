@@ -75,12 +75,12 @@ class DatabaseService {
   ///post data
   //to update category data
   Future<void> updatePostData(String uid, String imagePath, String category, String title,
-      String description, int price) async {
+      String description, String price) async {
 
     var userName = await userCollection.document(uid).get();
 
     return await postCollection.document().setData({
-      uid: uid,
+      'uid': uid,
       'username': userName['username'],
       'imagePath': imagePath,
       'category': category,
@@ -107,5 +107,5 @@ class DatabaseService {
   Stream<PostData> get postData {
     return postCollection.document().snapshots().map(_postDataFromSS);
   }
-  
+
 }

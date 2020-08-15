@@ -4,7 +4,10 @@ import 'package:karya_garudahacks/model/product.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:karya_garudahacks/model/user.dart';
 import 'package:karya_garudahacks/services/database.dart';
+import 'package:provider/provider.dart';
 import 'dart:io';
+
+import 'home_screen.dart';
 
 const textInputDecoration = InputDecoration(
   fillColor: Colors.white,
@@ -22,11 +25,12 @@ class UploadPage extends StatefulWidget {
 }
 
 class _UploadPageState extends State<UploadPage> {
-  String imagePath, category, title, description, uid;
-  int price;
+  String imagePath, category, title, description, uid, price;
 
   @override
   Widget build(BuildContext context) {
+    final user= Provider.of<User>(context);
+    String uid = user.uid;
 
     void imageAcquisition(){
       showModalBottomSheet(
@@ -69,7 +73,7 @@ class _UploadPageState extends State<UploadPage> {
           });
     }
 
-    return StreamBuilder(
+    return StreamBuilder<PostData>(
       stream: DatabaseService().postData,
       // ignore: missing_return
       builder: (context, snapshot){
@@ -90,6 +94,9 @@ class _UploadPageState extends State<UploadPage> {
                   style: TextStyle(color: color1),
                 ),
                 onPressed: () async {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context)=> HomeScreen())
+                  );
                   //upload image to firebase
                   await DatabaseService().updatePostData(
                       uid ?? uid,
@@ -97,8 +104,8 @@ class _UploadPageState extends State<UploadPage> {
                       category ?? postData.category,
                       title ?? postData.title,
                       description ?? postData.description,
-                      price ?? postData.price);
-                  Navigator.pop(context);
+                      price.toString() ?? postData.price);
+
                 },
               )
             ],
@@ -174,7 +181,7 @@ class _UploadPageState extends State<UploadPage> {
                   //image/work price
                   TextField(
                     decoration: textInputDecoration.copyWith(hintText: 'Price'),
-                    onChanged: (val) => setState(()=> price = int.parse(val)),
+                    onChanged: (val) => setState(()=> price = (val)),
                   ),
                 ],
               ),
