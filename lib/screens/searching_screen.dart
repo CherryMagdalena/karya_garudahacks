@@ -45,49 +45,56 @@ class _SearchScreenState extends State<SearchScreen> {
 
             //trio buttons
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.all(6),
-                  width: 8,
-                  height: 8,
-                  decoration: roundButton(),
-                ),
-                Container(
-                  width: 120,
-                  child: Text(
-                    'All Posts',
-                    textAlign: TextAlign.left,
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.all(6),
+                        height: 8,
+                        decoration: roundButton(),
+                      ),
+                      Text(
+                        'All post',
+                        textAlign: TextAlign.left,
+                      )
+                    ],
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.all(6),
-                  width: 8,
-                  height: 8,
-                  decoration: roundButton(),
-                ),
-                Container(
-                  width: 120,
-                  child: Text(
-                    'Not for Sale',
-                    textAlign: TextAlign.left,
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.all(6),
+                        height: 8,
+                        decoration: roundButton(),
+                      ),
+                      Text(
+                        'Not for sale',
+                        textAlign: TextAlign.left,
+                      )
+                    ],
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.all(6),
-                  width: 8,
-                  height: 8,
-                  decoration: roundButton(),
-                ),
-                Container(
-                  width: 102,
-                  child: Text(
-                    'Sale only',
-                    textAlign: TextAlign.left,
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.all(6),
+                        height: 8,
+                        decoration: roundButton(),
+                      ),
+                      Text(
+                        'Sale only',
+                        textAlign: TextAlign.left,
+                      )
+                    ],
                   ),
                 ),
               ],
             ),
-            Container(height:12,), //spacing
+            Container(height:9,), //spacing
             SearchScreenPosts(),
           ],
         ),
